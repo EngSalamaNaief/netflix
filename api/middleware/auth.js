@@ -1,9 +1,9 @@
 const jwt=require("jsonwebtoken");
 
-function Auth(req,res,net){
+function Auth(req,res,next){
   const token = req.header("x-auth-token");
   if(token){
-    const decoded=jwt.virify(token,process.env.SECRETCODE);
+    const decoded=jwt.verify(token,process.env.SECRETCODE);
     !decoded&&res.status(403).json({msg:"invalid token"});
     req.user=decoded;
     next();

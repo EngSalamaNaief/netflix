@@ -1,10 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
 import Navbar from "./components/Navbar"
+import Home from './pages/Home';
 function App() {
   return (
-    <div className="App  text-red-800">
+    <div className="">
       <Navbar/>
+      <Home/>
     </div>
   );
 }

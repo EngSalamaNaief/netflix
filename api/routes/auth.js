@@ -17,7 +17,7 @@ router.post("/register",async(req,res)=>{
         const savedUser=await newUser.save();
 
         jwt.sign(
-            {id:savedUser._id,isAdmin,savedUser.isAdmin},
+            {id:savedUser._id,isAdmin:savedUser.isAdmin},
               process.env.SECRETCODE ,
             {expiresIn:3600},
             (err,token)=>{
@@ -44,7 +44,7 @@ router.post("/login",async(req,res)=>{
         if(bcrypt.compareSync(req.body.password,user.password)){
 
         jwt.sign(
-            {id:user._id,isAdmin,user.isAdmin},
+            {id:user._id,isAdmin:user.isAdmin},
             process.env.SECRETCODE,
             {expiresIn:3600},
             (err,token)=>{
@@ -54,7 +54,7 @@ router.post("/login",async(req,res)=>{
             }
         )
         }else{
-            !user&& res.status(404).json({msg:"wrong password"});
+            res.status(404).json({msg:"wrong password"});
         }
     }catch(err){
         res.status(404).json({msg:err})

@@ -69,15 +69,15 @@ router.get("/getrandum",auth,async(req,res)=>{
     let movies;
     try{
       if(type==="series"){
-        movies=await Movie.aggregate{[
+        movies=await Movie.aggregate([
           {$match:{isSeries:true}},
           {$sample:{size:1}}
-          ]}
+          ])
       }else{
-          movies=await Movie.aggregate{[
+          movies=await Movie.aggregate([
           {$match:{isSeries:false}},
           {$sample:{size:1}}
-          ]}
+          ])
       }
       res.status(200).json({movies});
     }catch(err){

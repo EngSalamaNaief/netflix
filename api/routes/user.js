@@ -79,7 +79,7 @@ router.get("/userstats",auth,async(req,res)=>{
       "April",
       "May",
       "June",
-      "July":
+      "July",
       "August",
       "September",
       "October",
@@ -100,7 +100,8 @@ router.get("/userstats",auth,async(req,res)=>{
             }
           }
           ])
-        res.status(202).json({user})
+          console.log(data)
+        res.status(202).json(data)
     }catch(err){
         res.status(404).json({msg:err})
     }
