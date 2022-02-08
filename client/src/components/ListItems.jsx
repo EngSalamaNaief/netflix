@@ -4,8 +4,8 @@ export default function ListItems() {
 
     
   return (
-        <div className=' h-32 bg-white mr-1 ' style={{width:"250px"}}>
-           item
+        <div className='overflow-hidden h-32 bg-white' style={{width:"250px",margin:"0 5px 0 0"}}>
+           <img src="./img/nature.jpg" alt=""  className='w-full h-full object-cover'/>
         </div>
     );
 }
