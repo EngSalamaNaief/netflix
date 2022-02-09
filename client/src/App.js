@@ -1,10 +1,14 @@
 
 import Home from './pages/Home';
+import Watch from './pages/Watch';
+import {BrowserRouter as Router,Route,Switch} from "react-router-dom"
 function App() {
   return (
-    <div className="">
-      <Home/>
-    </div>
+    <Router className="">
+       
+        <Watch/>
+      
+    </Router>
   );
 }
 

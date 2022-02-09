@@ -22,14 +22,11 @@ export default function List() {
     }
   }
   return (
-        <div className='py-2 overflow-hidden'>
+        <div className='py-1'>
             <div className="text-white px-8 py-2 font-medium">Continue to watch</div>
             <div className='relative flex items-center'>
-               <div onClick={()=>handleClick("left")} className='h-full text-4xl opacity-60 cursor-pointer bg-black text-white absolute bottom-0 left-0 flex items-center z-10'><MdArrowBackIosNew/></div>
+               <div onClick={()=>handleClick("left")} className='h-full text-4xl opacity-60 cursor-pointer bg-black text-white absolute bottom-0 left-0 flex items-center z-50'><MdArrowBackIosNew/></div>
                  <motion.div className='flex items-center px-9' initial={{x:0}} animate={{x:slideAnim}} transition={{type:"spring",stiffness:50,duration:1}} ref={listRef}  >
-                    <ListItems/>
-                    <ListItems/>
-                    <ListItems/>
                     <ListItems/>
                     <ListItems/>
                     <ListItems/>
@@ -39,7 +36,7 @@ export default function List() {
                     <ListItems/>
                  </motion.div>
                
-               <div onClick={()=>handleClick("right")} className='h-full text-4xl opacity-60 cursor-pointer text-white bg-black absolute bottom-0 right-0 flex items-center z-10'><MdArrowForwardIos/></div>
+               <div onClick={()=>handleClick("right")} className='h-full text-4xl opacity-60 cursor-pointer text-white bg-black absolute bottom-0 right-0 flex items-center z-50'><MdArrowForwardIos/></div>
             </div>
         </div>
     );
