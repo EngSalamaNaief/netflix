@@ -12,7 +12,7 @@ export default function Watch() {
         </Link>
             <div className='w-full h-full '>
             
-               <video src={flying} controls slot='' autoPlay={true} muted={true}  className="w-full h-full object-cover"></video>
+               <video src={flying} controls autoPlay={true} muted={true}  className="w-full h-full object-cover"></video>
             </div>
             
        
