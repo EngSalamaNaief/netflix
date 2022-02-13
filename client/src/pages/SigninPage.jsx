@@ -19,7 +19,7 @@ function SigninPage (){
     
     <div className="text-white register flex justify-center w-screen h-screen relative">
       <div className="flex items-center justify-between md:px-10 px-4 py-3 absolute top-0 left-0 z-10 w-full">
-        <div className="uppercase items-center text-red-600 text-2xl md:text-4xl pr-8 font-bold cursor-pointer">netflex</div>
+        <div className="uppercase items-center text-red-600 text-3xl md:text-4xl pr-8 font-bold cursor-pointer">netflex</div>
       
       </div>
       <div className="md:w-1/3 w-full h-full flex justify-center items-center px-4">

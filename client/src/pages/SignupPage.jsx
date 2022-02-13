@@ -20,7 +20,7 @@ function SignupPage (){
     
     <div className="text-white register w-screen h-screen relative">
       <div className="flex items-center justify-between md:px-10 px-4 py-3 absolute top-0 left-0 z-10 w-full">
-        <div className="uppercase items-center text-red-600 text-2xl md:text-4xl pr-8 font-bold cursor-pointer">netflex</div>
+        <div className="uppercase items-center text-red-600 text-3xl md:text-4xl pr-8 font-bold cursor-pointer">netflex</div>
         <Link to="/login" className="px-4 py-1 text-white bg-red-600 rounded-lg">Sign In</Link>
       </div>
       <div className="w-full h-full flex justify-center items-center px-4">
@@ -35,7 +35,7 @@ function SignupPage (){
                   <div className="flex justify-center py-2">
                     <div className="bg-white md:w-2/3 w-full flex items-center">
                       <input type="email" placeholder="Email or Phone " ref={emailRef} className="w-3/4  px-2 focus:outline-none text-black md:text-xl py-2" />
-                      <button onClick={()=>handleGetStart()} className="w-1/4 text-white bg-red-600 py-2 md:text-xl">Get Started</button>
+                      <button onClick={()=>handleGetStart()} className="md:w-1/4  text-white bg-red-600 py-2 px-1 md:text-xl">Get Started</button>
                       </div>
                  </div>
                 ):(
@@ -43,7 +43,7 @@ function SignupPage (){
                   
                   <div className="bg-white w-full md:w-2/3 flex items-center">
                     <input type="password" placeholder="Password " ref={passwordRef} className="w-3/4  px-2 focus:outline-none text-black md:text-xl py-2" />
-                    <button type="submit" className="w-1/4 text-white bg-red-600 py-2 md:text-xl">Start</button>
+                    <button type="submit" className="w-1/4 text-white bg-red-600 py-2 px-1 md:text-xl">Start</button>
                   </div>
                 </form>
                 )

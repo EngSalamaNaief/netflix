@@ -9,7 +9,8 @@ router.post("/create",auth,async(req,res)=>{
     try{
        if(req.user.isAdmin){
         const newMovie=new Movie(req.body)
-        res.status(201).json({user:updatedUser})
+        const movie=await newMovie.save();
+        res.status(201).json({msg:"movie created succesfully"})
        }else{
          return res.status(404).json({msg:"you not allowed to create movie"});
        }
@@ -22,8 +23,8 @@ router.put("/update/:id",auth,async(req,res)=>{
     
     try{
        if(req.user.isAdmin){
-        const movie=await Movie.findByIdAndUpdate(req.params.id);
-        res.status(201).json({user:updatedUser})
+        const movie=await Movie.findByIdAndUpdate(req.params.id,req.body);
+        res.status(201).json({msg:"movie updated succesfully"})
        }else{
          return res.status(404).json({msg:"you not allowed to update movie"});
        }
@@ -31,6 +32,7 @@ router.put("/update/:id",auth,async(req,res)=>{
         res.status(404).json({msg:err})
     }
 })
+
 //delete
 router.delete("/delete/:id",auth,async(req,res)=>{
     
@@ -45,6 +47,7 @@ router.delete("/delete/:id",auth,async(req,res)=>{
         res.status(404).json({msg:err})
     }
 })
+
 //GET MOVIE
 router.get("/getmovie/:id",auth,async(req,res)=>{
     try{

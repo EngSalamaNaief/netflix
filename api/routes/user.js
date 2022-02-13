@@ -54,6 +54,16 @@ router.get("/getuser/:id",auth,async(req,res)=>{
         res.status(404).json({msg:err})
     }
 })
+//GET USER 
+router.get("/user",auth,async(req,res)=>{
+    
+    try{
+        const user= await User.findById(req.user.id)
+        res.status(202).json({user})
+    }catch(err){
+        res.status(404).json({msg:err})
+    }
+})
 //GET ALL USERS
 router.get("/getusers",auth,async(req,res)=>{
     const query=req.query.new;

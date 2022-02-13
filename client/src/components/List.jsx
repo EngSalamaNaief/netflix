@@ -22,7 +22,7 @@ export default function List() {
     }
   }
   return (
-        <div className='py-1'>
+        <div className='py-1 w-full'>
             <div className="text-white px-8 py-2 font-medium">Continue to watch</div>
             <div className='relative flex items-center'>
                <div onClick={()=>handleClick("left")} className='h-full text-4xl opacity-60 cursor-pointer bg-black text-white absolute bottom-0 left-0 flex items-center z-50'><MdArrowBackIosNew/></div>

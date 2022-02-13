@@ -1,10 +1,19 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import {motion} from "framer-motion";
+import {Link} from "react-router-dom"
 import {MdSearch,MdNotifications,MdArrowDropDown,MdViewHeadline,MdClose} from "react-icons/md"
 function Navbar(){
   const [dropedDowen,setDropedDowen]=useState(false);
   const [isScrolled,setIsScrolled]=useState(false);
   const [isAnim,setIsAnim]=useState({visable:0,postion:-200});
+
+   useEffect(()=>{
+     if(dropedDowen){
+     setIsAnim({visable:100,postion:0})
+   }else{
+    setIsAnim({visable:0,postion:-200})
+   }
+},[dropedDowen])
 
   window.onscroll =()=>{
     setIsScrolled(window.scrollY ===0 ? false: true);
@@ -14,23 +23,19 @@ function Navbar(){
  
  const dropAnim=()=>{
   setDropedDowen(!dropedDowen);
-   if(dropedDowen){
-     setIsAnim({visable:100,postion:0})
-   }else{
-    setIsAnim({visable:0,postion:-200})
-   }
+
  }
   return(
     <motion.div className={`rounded-b-md text-white py-2 fixed w-full z-40`} style={!isScrolled?{background:"linear-gradient(to top,transparent 0%,rgb(0,0,0,0.4) 50%)"}:{background:"black"}}>
       <div className="md:px-10 px-2">
       <div className="flex items-center justify-between">
        <div className=" items-center flex ">
-         <div className="uppercase items-center text-red-500 text-2xl md:text-4xl pr-8 font-bold cursor-pointer">netflex</div>
+         <div className="uppercase items-center text-red-500 text-3xl md:text-4xl pr-8 font-bold cursor-pointer">netflex</div>
             <div className="md:flex hidden">
              <div className="flex items-center justify-between">
-               <div className="capitalize px-2 cursor-pointer">homepage</div>
-               <div className="capitalize px-2 cursor-pointer">series</div>
-               <div className="capitalize px-2 cursor-pointer">movies</div>
+               <Link to="/" className="capitalize px-2 cursor-pointer">homepage</Link>
+               <Link to="/series" className="capitalize px-2 cursor-pointer">series</Link>
+               <Link to="/movies" className="capitalize px-2 cursor-pointer">movies</Link>
                <div className="capitalize px-2 cursor-pointer">new and popular</div>
                <div className="capitalize px-2 cursor-pointer">my list</div>
               </div>

@@ -2,12 +2,12 @@ import React from 'react';
 import {MdPlayArrow,MdInfoOutline} from "react-icons/md"
 export default function Featured({type}) {
   return (
-      <div className="relative overflow-hidden" style={{height:"90vh"}}>
-           <div className="absolute top-20 left-10 z-10 ">
+      <div className="relative overflow-hidden w-full" style={{height:"90vh"}}>
+           <div className="absolute top-20 left-0 px-2 md:left-10 z-10 ">
                {
                    type&&(<div className='flex items-end'>
-                       <div className='mr-4 font-medium text-white text-3xl rounded-md px-1' style={{background:"linear-gradient(to left,transparent 0%,rgb(0,0,0,0.2) 50%)"}}>{type==="movie"?"Movies":"Series"}</div>
-                       <select name="genre" id="genre" className='bg-black focus:outline-none outline-white outline-2 text-white rounded-md px-1'>
+                       <div className='mr-4 font-medium text-white text-xl md:text-3xl rounded-md px-1' style={{background:"linear-gradient(to left,transparent 0%,rgb(0,0,0,0.2) 50%)"}}>{type==="movies"?"Movies":"Series"}</div>
+                       <select name="genre" id="genre" className='bg-black focus:outline-none outline-white outline-2 text-white rounded-md px-1 py-1'>
                           <option >Genre</option>
                           <option value="adventure">Adventure</option>
                           <option value="comedy">Comedy</option>
@@ -29,11 +29,11 @@ export default function Featured({type}) {
            <div className='w-full h-full'  >
               <img src="https://www.thenews.com.pk//assets/uploads/updates/2019-10-10/539290_269048_Avengers_updates.jpg" className='w-full h-full object-cover' alt="" />
            </div>
-           <div className="absolute z-10 bottom-20 left-10 w-full">
-             <div className="w-96 h-24">
+           <div className="absolute z-10 bottom-20 md:left-10 left-0 w-full px-2">
+             <div className="md:w-96 w-full h-24 ">
                <img className="w-full h-full object-fit" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVl-Lx67q85RhM07GTtA-08fIGh2DTVIzDVA&usqp=CAU" alt="" />
              </div>
-             <div className="w-1/3 leading-6 my-5 text-wrap text-white py-1 px-2 rounded-md" style={{background:"linear-gradient(to left,transparent 0%,rgb(0,0,0,0.2) 50%)"}}>
+             <div className="md:w-1/3 w-full leading-6 my-5 text-wrap text-sm text-white py-1 px-2 rounded-md" style={{background:"linear-gradient(to left,transparent 0%,rgb(0,0,0,0.2) 50%)"}}>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, labore voluptates soluta doloremque eaque quam ea ipsum. Fugit id dignissimos rerum numquam doloremque culpa, odit voluptatum quas! Cupiditate, quod nulla.
              </div>
              <div className='flex items-center'>

@@ -5,6 +5,7 @@ const app =express();
 const auth=require("./routes/auth");
 const user=require("./routes/user");
 const movie=require("./routes/movie");
+const list=require("./routes/list");
 
 
 dotenv.config();
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use("/api/auth",auth);
 app.use("/api/users",user);
 app.use("/api/movies",movie);
+app.use("/api/lists",list);
 
 app.listen(5000,()=>{
     console.log("server is running on port 5000")

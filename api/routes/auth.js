@@ -12,6 +12,7 @@ router.post("/register",async(req,res)=>{
         const newUser = User({
             username:req.body.username,
             email:req.body.email,
+            isAdmin:req.body.isAdmin||false,
             password:bcrypt.hashSync(req.body.password,salt)
         });
         const savedUser=await newUser.save();
