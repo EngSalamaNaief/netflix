@@ -1,19 +1,21 @@
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-
-function SignupPage (){
+import { connect } from "react-redux";
+import {Register} from '../redux/actions/AuthAction'
+function SignupPage ({Register}){
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
   const emailRef=useRef(null);
-  const passwordRef=useRef(null);
+
 
   const handleGetStart=()=>{
       setEmail(emailRef.current.value);
   }
   const handleStart=(e)=>{
     e.preventDefault();  
-    setPassword(passwordRef.current.value);
-
+    
+    const user={email,password};
+    Register(user);
   }
  
   return(
@@ -42,7 +44,7 @@ function SignupPage (){
                 <form action="" onSubmit={(e)=>handleStart(e)} className="flex justify-center py-2 ">
                   
                   <div className="bg-white w-full md:w-2/3 flex items-center">
-                    <input type="password" placeholder="Password " ref={passwordRef} className="w-3/4  px-2 focus:outline-none text-black md:text-xl py-2" />
+                    <input type="password" placeholder="Password " onChange={(e)=>setPassword(e.target.value)} className="w-3/4  px-2 focus:outline-none text-black md:text-xl py-2" />
                     <button type="submit" className="w-1/4 text-white bg-red-600 py-2 px-1 md:text-xl">Start</button>
                   </div>
                 </form>
@@ -54,4 +56,4 @@ function SignupPage (){
     )
 }
 
-export default SignupPage;
+export default connect(null,{Register})(SignupPage);

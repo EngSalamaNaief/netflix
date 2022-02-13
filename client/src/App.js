@@ -5,10 +5,22 @@ import {BrowserRouter as Router,Route,Switch,Redirect} from "react-router-dom"
 import SignupPage from './pages/SignupPage';
 import SigninPage from './pages/SigninPage';
 import Notfound from './pages/Notfound';
+import {Provider} from "react-redux";
+import Store from './redux/store/Store';
+import { useEffect, useState } from 'react';
+import {LoadUser} from "./redux/actions/AuthAction"
+
 function App() {
-  const user=true;
+  const [user,setUser] = useState(null);
+
+  useEffect(()=>{
+       Store.dispatch(LoadUser());
+     //  setUser(Store.getState.authState.user)
+  },[])
+  console.log(Store.getState.authState);
   return (
-    <Router className="">
+    <Provider store={Store}>
+      <Router className="">
        <Switch>
          <Route path="/" exact>
            {user?(<Home/>):(<Redirect to="/register"/>)}
@@ -34,6 +46,7 @@ function App() {
        </Switch>
       
     </Router>
+    </Provider>
   );
 }
 

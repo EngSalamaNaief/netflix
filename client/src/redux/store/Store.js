@@ -5,9 +5,9 @@
  const initialState={}; 
   
   
- const store=createStore(RootReducer,initialState,compose( 
+ const Store=createStore(RootReducer,initialState,compose( 
       applyMiddleware(Thunk), 
  window.__REDUX_DEVTOOLS_EXTENSION__&&window.__REDUX_DEVTOOLS_EXTENSION__() 
  )) 
   
- export default store;
+ export default Store;
