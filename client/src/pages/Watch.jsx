@@ -2,7 +2,7 @@ import React from 'react'
 import {MdArrowBack} from "react-icons/md";
 import flying from "../img/flying.mp4";
 import {Link} from "react-router-dom";
-import Player from 'react-player'
+
 export default function Watch() {
   return (
     <div className='relative h-screen w-screen'  >
@@ -12,7 +12,7 @@ export default function Watch() {
         </Link>
             <div className='w-full h-full '>
             
-               <video src={flying} controls autoPlay={true} muted={true}  className="w-full h-full object-cover"></video>
+               <video src="https://m.youtube.com/watch?v=5lKmkKx5kvA" controls autoPlay={true} muted={true}  className="w-full h-full object-cover"></video>
             </div>
             
        

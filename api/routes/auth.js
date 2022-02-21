@@ -8,15 +8,14 @@ const User = require("../models/user");
 router.post("/register",async(req,res)=>{
     const salt = bcrypt.genSaltSync(10);
     try{
-
+       
         const newUser = User({
-            username:req.body.username,
             email:req.body.email,
             isAdmin:req.body.isAdmin||false,
             password:bcrypt.hashSync(req.body.password,salt)
         });
         const savedUser=await newUser.save();
-
+       console.log(savedUser)
         jwt.sign(
             {id:savedUser._id,isAdmin:savedUser.isAdmin},
               process.env.SECRETCODE ,

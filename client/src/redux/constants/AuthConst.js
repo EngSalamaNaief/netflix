@@ -5,3 +5,4 @@ export const REGISTER_FAIL="REGISTER_FAIL";
 export const LOGIN_SUCCESS="LOGIN_SUCCES";
 export const LOGIN_FAIL="LOGIN_FAIL";
 export const LOADING="LOADING";
+export const LOGOUT_SUCCESS="LOGOUT_SUCCESS";

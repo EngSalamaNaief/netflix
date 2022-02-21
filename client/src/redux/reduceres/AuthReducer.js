@@ -5,7 +5,8 @@ REGISTER_SUCCESS,
 REGISTER_FAIL,
 LOGIN_SUCCESS,
 LOGIN_FAIL,
-LOADING
+LOADING,
+LOGOUT_SUCCESS,
 } from "../constants/AuthConst";
 
 const initState={
@@ -16,33 +17,36 @@ const initState={
   msg:""
 }
 export default function AuthReducer(state=initState,action){
+  console.log("actions",action)
   switch (action.type) {
-    case 'LOADING':
+    case LOADING:
       return{
         ...state,
         loading:true
       }
-    case 'LOAD_USER_SUCCESS':
+    case LOAD_USER_SUCCESS:
       return{
         ...state,
         loaded:true,
         loading:false,
         user:action.payload
       }
-    case 'REGISTER_SUCCESS':
-    case 'LOGIN_SUCCESS':{
+    case REGISTER_SUCCESS:
+    case LOGIN_SUCCESS:{
+      console.log("actions",action)
       localStorage.setIem("token",action.payload.token)
       return{
         ...state,
-        loaded:false,
+        loaded:true,
         loading:false,
         user:action.payload.user,
         token:action.payload.token
       }
     }
-    case 'LOAD_USER_FAIL':
-    case 'REGISTER_FAIL':
-    case 'LOGIN_FAIL':
+    case LOAD_USER_FAIL:
+    case REGISTER_FAIL:
+    case LOGIN_FAIL:
+    case LOGOUT_SUCCESS:
       {
         localStorage.removeItem("token");
       return{
@@ -50,7 +54,8 @@ export default function AuthReducer(state=initState,action){
         loaded:false,
         loading:false,
         token:null,
-        user:null
+        user:null,
+        msg:action.payload
       }
       }
     

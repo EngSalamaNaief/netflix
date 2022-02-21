@@ -67,9 +67,9 @@ function Navbar(){
                </div>
                 <div className="mx-2 text-xl cursor-pointer"><MdSearch/></div>
                </div>
-               <div onClick={()=>setDropedDowen(false)} className="capitalize px-2 py-1 cursor-pointer">homepage</div>
-               <div onClick={()=>setDropedDowen(false)} className="capitalize px-2 py-1 cursor-pointer">series</div>
-               <div onClick={()=>setDropedDowen(false)} className="capitalize px-2 py-1 cursor-pointer">movies</div>
+               <Link to="/" onClick={()=>setDropedDowen(false)} className="block capitalize px-2 py-1 cursor-pointer">homepage</Link>
+               <Link to="/series" onClick={()=>setDropedDowen(false)} className="block capitalize px-2 py-1 cursor-pointer">series</Link>
+               <Link to="/movies" onClick={()=>setDropedDowen(false)} className="block capitalize px-2 py-1 cursor-pointer">movies</Link>
                <div onClick={()=>setDropedDowen(false)} className="capitalize px-2 py-1 cursor-pointer">new and popular</div>
                <div onClick={()=>setDropedDowen(false)} className="capitalize px-2 py-1 cursor-pointer">my list</div>
                <div onClick={()=>setDropedDowen(false)} className="capitalize px-2 mb-2 mt-4 cursor-pointer">logout</div>

@@ -1,8 +1,7 @@
 import React from 'react';
 import Navbar from "../components/Navbar";
-import Featured from "../components/Featured";
-import List from '../components/List';
-export default function Notfound({type}) {
+
+export default function Notfound() {
   return (
       <div className="bg-black w-full h-screen overflow-hidden">
            <Navbar/>

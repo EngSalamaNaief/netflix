@@ -5,7 +5,8 @@ REGISTER_SUCCESS,
 REGISTER_FAIL,
 LOGIN_SUCCESS,
 LOGIN_FAIL,
-LOADING
+LOADING,
+LOGOUT_SUCCESS
 } from "../constants/AuthConst";
 import axios from "axios"; 
 export const LoadUser=()=>(dispatch,getState)=>{
@@ -20,17 +21,18 @@ export const LoadUser=()=>(dispatch,getState)=>{
   }
     if(token){
       config.headers["x-auth-token"]=token;
-      axios.get("/user/getuser",config)
+      axios.get("/api/users/user")
            .then(res=>{
+             console.log("user",res.data)
              dispatch({
                type:LOAD_USER_SUCCESS,
                payload:res.data.user
              })
            }).catch(e=>{
-             console.log(e.response)
+             console.log(e.response.data.msg)
                dispatch({
                type:LOAD_USER_FAIL,
-               payload:e.response.message
+               payload:e.response.data.msg
              })
            })
     }
@@ -46,18 +48,19 @@ export const Register=(user)=>(dispatch)=>{
   }
     
   const body=JSON.stringify({...user})
-
-      axios.post("http://localhost:5000/api/auth/register",body,config)
+ console.log(user)
+      axios.post("/api/auth/register",user)
            .then(res=>{
+             console.log("res",res.data)
              dispatch({
                type:REGISTER_SUCCESS,
                payload:res.data
              })
            }).catch(e=>{
-             console.log(e.response)
+             console.log(e.response.data.msg)
                dispatch({
                type:REGISTER_FAIL,
-               payload:e.response.message
+               payload:e.response.data.msg
              })
            })
     }
@@ -72,20 +75,28 @@ export const Register=(user)=>(dispatch)=>{
         }
       }
         
-      const body=JSON.stringify({...user})
-    
-          axios.post("/auth/login",body,config)
+   //   const body=JSON.stringify({...user})
+    console.log(user)
+          axios.post("/api/auth/login",user)
                .then(res=>{
+                 console.log("res data",res.data)
                  dispatch({
                    type:LOGIN_SUCCESS,
                    payload:res.data
                  })
                }).catch(e=>{
-                 console.log(e.response)
+                 console.log(e.response.data.msg)
                    dispatch({
                    type:LOGIN_FAIL,
-                   payload:e.response.message
+                   payload:e.response.data.msg
                  })
                })
         }
   
+// log out 
+export const Logout=()=>(dispatch)=>{
+  dispatch({
+    type:LOGOUT_SUCCESS,
+    payload:""
+  })
+}
