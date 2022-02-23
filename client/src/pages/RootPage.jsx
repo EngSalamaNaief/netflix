@@ -10,11 +10,11 @@ import {connect} from 'react-redux';
 import {LoadUser} from "../redux/actions/AuthAction"
 
 function RootPage({userState}) {
- const [user,setUser] = useState(true);
+ const [user,setUser] = useState(null);
   
   useEffect(()=>{
       
-   //  setUser(userState.user)
+    setUser(userState.user)
   },[userState.user])
  
   return (
@@ -29,7 +29,7 @@ function RootPage({userState}) {
            {user?(<Home type="series"/>):(<Redirect to="/register"/>)}
          </Route>
          <Route path="/movies" >
-           {user?(<Home type="movies"/>):(<Redirect to="/register"/>)}
+           {user?(<Home type="movie"/>):(<Redirect to="/register"/>)}
          </Route>
          <Route path="/watch">
            {user?(<Watch/>):(<Redirect to="/register"/>)}

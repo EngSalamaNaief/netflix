@@ -49,7 +49,7 @@ router.delete("/delete/:id",auth,async(req,res)=>{
 })
 
 //get lists
-router.get("/getlist",async (req,res)=>{
+router.get("/getlist",auth,async (req,res)=>{
   const typeQuery=req.query.type
   const genreQuery=req.query.genre
  let list=[]

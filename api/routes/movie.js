@@ -49,7 +49,7 @@ router.delete("/delete/:id",auth,async(req,res)=>{
 })
 
 //GET MOVIE
-router.get("/getmovie/:id",async(req,res)=>{
+router.get("/getmovie/:id",auth,async(req,res)=>{
     try{
        const movie= await Movie.findById(req.params.id);
         res.status(201).json({movie})

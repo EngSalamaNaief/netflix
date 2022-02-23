@@ -16,7 +16,7 @@ LOADING_RANDUM
 
 const initState={
   randumMovie:null,
-  movie:null,
+  movie:[],
   allMovies:null,
   loading_all:null,
   loading_movie:null,
@@ -44,7 +44,7 @@ export default function AuthReducer(state=initState,action){
       return{
         ...state,
         loading_movie:false,
-        movie:action.payload
+        movie:[...state.movie,action.payload]
       }
     case GET_RANDUM_MOVIES_SUCCESS:
       return{
@@ -62,7 +62,7 @@ export default function AuthReducer(state=initState,action){
       return{
         ...state,
         loading_movie:false,
-        movie:null,
+        movie:[],
         msg:action.payload
       }
     case GET_RANDUM_MOVIES_FAIL:

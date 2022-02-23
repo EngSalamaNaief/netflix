@@ -4,9 +4,18 @@ GET_LISTS_FAIL,
 LOADING
 } from "../constants/ListsConst";
 import axios from "axios"
-export const GetLists=()=>(dispatch,getState)=>{
+export const GetLists=(type,genre)=>(dispatch,getState)=>{
   dispatch({type:LOADING});
-  axios.get("/api/lists/getlist")
+   const token =getState().authState.token;
+  const config={
+    headers:{
+      "type-content":"application/json"
+    }
+  }
+  
+    if(token){
+      config.headers["x-auth-token"]=token;
+        axios.get(`/api/lists/getlist${type?"?type="+type:""}${genre?"&genre="+genre:""}`,config)
        .then(res=>{
          dispatch({
            type:GET_LISTS_SUCCES,
@@ -18,4 +27,5 @@ export const GetLists=()=>(dispatch,getState)=>{
            payload:e.response.data.msg
          })
        })
+    }
 }

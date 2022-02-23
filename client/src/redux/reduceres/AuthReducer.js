@@ -10,14 +10,14 @@ LOGOUT_SUCCESS,
 } from "../constants/AuthConst";
 
 const initState={
-  token:localStorage.getItem("token"),
+  token:localStorage.getItem("token")||null,
   user:null,
   loading:null,
   loaded:null,
   msg:""
 }
 export default function AuthReducer(state=initState,action){
-  console.log("actions",action)
+  
   switch (action.type) {
     case LOADING:
       return{
@@ -34,7 +34,7 @@ export default function AuthReducer(state=initState,action){
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:{
       console.log("actions",action)
-      localStorage.setIem("token",action.payload.token)
+      localStorage.setItem("token",action.payload.token)
       return{
         ...state,
         loaded:true,

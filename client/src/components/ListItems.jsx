@@ -1,30 +1,38 @@
 import React, { useState,useEffect } from 'react';
 import flying from "../img/flying.mp4";
 import {connect} from "react-redux"; 
+import {Link} from "react-router-dom"; 
 import {GetMovie} from "../redux/actions/MoveAction";
 import {MdOutlineThumbDown,MdOutlineThumbUp,MdPlayArrow,MdAdd} from "react-icons/md"
-function ListItems({movie,movieId,GetMovie}) {
+function ListItems({movieList,movieId,GetMovie}) {
 
   const [mouseEnter,setMouseEnter]=useState(false);
+  const [movie,setMovie]=useState("");
 useEffect(()=>{
   GetMovie(movieId)
 },[movieId])
-console.log("mmovie",movie)
+useEffect(()=>{
+  setMovie(movieList.find(m=>m._id===movieId))
+},[movieId,movieList])
+console.log("mmovie",movieList)
   return (
         <div onMouseEnter={()=>setMouseEnter(true)}  onMouseLeave={()=>setMouseEnter(false)} className='relative h-32 bg-white cursor-pointer' style={{width:"250px",margin:"0 5px 0 0"}}>
            <div className='w-full h-full overflow-hidden'>
-              <img src={`https://drive.google.com/file/d/12PW-f4SdBa1nKz-ORFuJHu2AdMii5Q2x/view?usp=drivesdk`} alt=""  className='w-full h-full object-cover'/>
+              <img src={movie?.imgSm} alt=""  className='w-full h-full object-cover'/>
            </div>
            {
               mouseEnter&&(
                <div className={`${mouseEnter?"block":"hidden"} box absolute bottom-0 left-0 w-72  z-40 text-white bg-black`} >
                <div  className='w-full h-1/4 rounded-b-md overflow-hidden'>
-      
+               <Link to={{pathname:"/watch",vedio:movie.vedio}}>
                   <video src={movie?.trailer} autoPlay={mouseEnter} muted={mouseEnter} loop className='w-full h-full object-cover'/>
+                </Link>
                </div>
                <div className='py-2 px-3'>
                  <div className='flex items-center text-white py-2 '>
-                    <span className='p-1 border-2 cursor-pointer mr-3 border-white rounded-full'><MdPlayArrow/></span> 
+                    
+                      <Link to={{pathname:"/watch",vedio:movie.vedio}} className='p-1 border-2 cursor-pointer mr-3 border-white rounded-full'><MdPlayArrow/></Link> 
+                     
                     <span className='p-1 border-2 cursor-pointer mr-3 border-white rounded-full'> <MdAdd/></span> 
                     <span className='p-1 border-2 cursor-pointer mr-3 border-white rounded-full'><MdOutlineThumbDown/></span> 
                     <span className='p-1 border-2 cursor-pointer mr-3 border-white rounded-full'><MdOutlineThumbUp/></span> 
@@ -32,7 +40,7 @@ console.log("mmovie",movie)
                   <div className="flex items-center text-sm text-gray-400 py-2">
                       <span className='mr-3'>1 hour 14 mins</span>
                       <span className='px-1 border border-gray-600 mr-3 rounded'>+{movie?.limit}</span>
-                      <span>{movie.year}</span>
+                      <span>{movie?.year}</span>
                   </div>
                   <p lang='10' className="text-white text-sm">
                     {movie?.desc}
@@ -47,7 +55,7 @@ console.log("mmovie",movie)
 }
 const mapStateToProps=(state)=>{
   return{
-    movie:state.movieState.movie
+    movieList:state.movieState.movie
   }
 }
 export default connect(mapStateToProps,{GetMovie})(ListItems)

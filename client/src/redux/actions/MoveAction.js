@@ -27,8 +27,8 @@ export const GetMovie=(id)=>(dispatch,getState)=>{
       "type-content":"application/json"
     }
   }
-  //  if(token){
-//      config.headers["x-auth-token"]=token;
+   if(token){
+     config.headers["x-auth-token"]=token;
       axios.get(`/api/movies/getmovie/${id}`,config)
            .then(res=>{
              dispatch({
@@ -41,7 +41,7 @@ export const GetMovie=(id)=>(dispatch,getState)=>{
                payload:e.response.data.msg
              })
            })
-  //  }
+    }
     }
 //git all movies
 export const GetALLMovie=()=>(dispatch,getState)=>{
@@ -80,7 +80,7 @@ export const GetRandumMovie=(query)=>(dispatch,getState)=>{
   }
     if(token){
       config.headers["x-auth-token"]=token;
-      axios.get(`/api/movies/getrandum?${query}`,config)
+      axios.get(`/api/movies/getrandum${query?"?type="+query:""}`,config)
            .then(res=>{
              dispatch({
                type:GET_RANDUM_MOVIES_SUCCESS,
