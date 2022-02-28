@@ -20,10 +20,10 @@ router.post("/create",auth,async(req,res)=>{
 })
 //UPDATE MOVIE
 router.put("/update/:id",auth,async(req,res)=>{
-    
+    console.log(req.body)
     try{
        if(req.user.isAdmin){
-        const movie=await Movie.findByIdAndUpdate(req.params.id,req.body);
+        await Movie.findByIdAndUpdate(req.params.id,{$set:req.body});
         res.status(201).json({msg:"movie updated succesfully"})
        }else{
          return res.status(404).json({msg:"you not allowed to update movie"});

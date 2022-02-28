@@ -1,9 +1,14 @@
 import React,{useEffect, useRef, useState} from 'react';
 import {users} from "../../domyData";
 import {useParams,useLocation} from "react-router-dom";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import Storage from "../../Firebase";
+ import {connect} from "react-redux";
+ import {CreateMovie} from "../../redux/actions/MoveAction"
 import { MdOutlinePermIdentity,MdDateRange,MdPhoneIphone,MdMailOutline,MdLocationSearching,MdUpload } from 'react-icons/md';
-export default function CreateMovie() {
+ function CreateMovies({CreateMovie}) {
     const [movie,setMovie] =useState({});
+    const [uploadedFiles,setUploadedFiles] =useState([]);
     const usersData =useRef(users);
     const [title,setTitle] =useState("");
     const [genre,setGenre] =useState("");
@@ -16,6 +21,7 @@ export default function CreateMovie() {
     const [imgSm,setImgSm] =useState(null);
     const [trailer,setTrailer] =useState(null);
     const [vedio,setVedio] =useState(null);
+    const [num,setNum] =useState(0);
     const params=useParams();
      const location=useLocation()
     useEffect(()=>{
@@ -23,10 +29,59 @@ export default function CreateMovie() {
       setMovie(location.movie)
     },[params.id]);
 
-    const handleUpdate=()=>{
-      
+    const UploadFiles=()=>{
+           
+        if(img,imgSm,imgTitle,trailer,vedio ){
+            const files=[{file:img,label:"img"},{file:imgSm,label:"imgSm"},{file:imgTitle,label:"imgTitle"},{file:trailer,label:"trailer"},{file:vedio,label:"vedio"}]
+            files.forEach(item=>{
+                const fileName = new Date().getTime() +item.label
+                //const uploadTask = Storage.ref(`/userImgs/${fileName}`).put(image);
+                const storageRef = ref(Storage, `/userImgs/${fileName}`);
+
+                const uploadTask = uploadBytesResumable(storageRef, item.file);
+                uploadTask.on('state_changed', 
+                (snapshot) => {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                
+                }, 
+                (error) => {
+                    // Handle unsuccessful uploads
+                console.log(error)
+                }, 
+                () => {
+                
+
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    setUploadedFiles(prev=>{
+                        return{...prev , [item.label]:downloadURL}
+                        });
+                        setNum(prev=>prev+1 );
+                    }
+            )
+        })
+    })
     }
-    console.log(location);
+}
+    const handleUpdate=()=>{
+        const newMovie={
+            title,
+            limit,
+            year,
+            desc,
+            genre,
+            isSeries,
+            img:uploadedFiles.img,
+            imgSm:uploadedFiles.imgSm,
+            imgTitle:uploadedFiles.imgTitle,
+            trailer:uploadedFiles.trailer,
+            vedio:uploadedFiles.vedio,
+        }
+          console.log(newMovie);
+
+        CreateMovie(newMovie)
+    }
+    console.log(uploadedFiles);
   return (
     <div className='pt-10 flex justify-center text-gray-900'>
       <div className='md:p-4'>
@@ -138,9 +193,17 @@ export default function CreateMovie() {
                              <input onChange={e=>setTrailer(e.target.files[0])} type="file" id='trailer' className='hidden'/>
                          </div>
                          </div>
-                            <div className='h-full relative'>
-                                <button onClick={()=>handleUpdate()} className='bg-blue-600 absolute bottom-0 w-full px-5 py-1 text-white rounded-lg'>Create</button>
-                            </div>
+                            {
+                                (num>=5)?(
+                                    <div className='h-full relative'>
+                                    <button onClick={()=>handleUpdate()} className='bg-blue-600 absolute bottom-0 w-full px-5 py-1 text-white rounded-lg'>Create</button>
+                                 </div>
+                                ):(
+                                <div className='h-full relative'>
+                                   <button onClick={()=>UploadFiles()} className='bg-blue-600 absolute bottom-0 w-full px-5 py-1 text-white rounded-lg'>Upload</button>
+                               </div>
+                                )
+                            }
                          </div>
                       </div>
                   </div>
@@ -150,3 +213,5 @@ export default function CreateMovie() {
     
  );
 }
+
+export default connect(null,{CreateMovie})(CreateMovies);

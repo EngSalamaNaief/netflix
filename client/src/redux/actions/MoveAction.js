@@ -103,10 +103,10 @@ export const CreateMovie=(movie)=>(dispatch,getState)=>{
       "type-content":"application/json"
     }
   }
-   const body=JSON.stringify({...movie})
+   
     if(token){
       config.headers["x-auth-token"]=token;
-      axios.post(`/api/movies/create`,body,config)
+      axios.post(`/api/movies/create`,movie,config)
            .then(res=>{
              dispatch({
                type:CREATE_MOVIE_SUCCES,
@@ -130,10 +130,10 @@ export const UpdateMovie=(movie,id)=>(dispatch,getState)=>{
       "type-content":"application/json"
     }
   }
-   const body=JSON.stringify({...movie})
+   
     if(token){
       config.headers["x-auth-token"]=token;
-      axios.post(`/api/movies/update/${id}`,body,config)
+      axios.put(`/api/movies/update/${id}`,movie,config)
            .then(res=>{
              dispatch({
                type:UPDATE_MOVIE_SUCCES,
@@ -147,7 +147,7 @@ export const UpdateMovie=(movie,id)=>(dispatch,getState)=>{
            })
     }
     }
-  //DELETE MOVIE
+  //DELETE MOVIE gfgf
 export const DeleteMovie=(id)=>(dispatch,getState)=>{
   
    const token =getState().authState.token;

@@ -17,6 +17,7 @@ function CreateUser({Register}) {
       
     },[]);
 
+    
     const handleUpdate=(e)=>{
       e.preventDefault();
       console.log(username,email,image, password,isAdmin)
