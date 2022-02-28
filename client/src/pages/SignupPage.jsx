@@ -5,6 +5,7 @@ import {Register} from '../redux/actions/AuthAction'
 function SignupPage ({Register}){
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
+  const [username,setUsername]=useState("");
   const emailRef=useRef(null);
 
 
@@ -14,7 +15,7 @@ function SignupPage ({Register}){
   const handleStart=(e)=>{
     e.preventDefault();  
     
-    const user={email,password};
+    const user={email,password,username};
     Register(user);
   }
  
@@ -41,10 +42,13 @@ function SignupPage ({Register}){
                       </div>
                  </div>
                 ):(
-                <form action="" onSubmit={(e)=>handleStart(e)} className="flex justify-center py-2 ">
+                <form action="" onSubmit={(e)=>handleStart(e)} className=" py-2 ">
                   
                   <div className="bg-white w-full md:w-2/3 flex items-center">
-                    <input type="password" placeholder="Password " onChange={(e)=>setPassword(e.target.value)} className="w-3/4  px-2 focus:outline-none text-black md:text-xl py-2" />
+                    <input type="text" value={username} placeholder="Username " onChange={(e)=>setUsername(e.target.value)} className="w-full  px-2 focus:outline-none text-black md:text-xl py-2" />
+                  </div>
+                  <div className="bg-white w-full md:w-2/3 flex items-center my-2">
+                    <input type="password" value={password} placeholder="Password " onChange={(e)=>setPassword(e.target.value)} className="w-3/4  px-2 focus:outline-none text-black md:text-xl py-2" />
                     <button type="submit" className="w-1/4 text-white bg-red-600 py-2 px-1 md:text-xl">Start</button>
                   </div>
                 </form>

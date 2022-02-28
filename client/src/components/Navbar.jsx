@@ -37,7 +37,8 @@ function Navbar(){
                <Link to="/series" className="capitalize px-2 cursor-pointer">series</Link>
                <Link to="/movies" className="capitalize px-2 cursor-pointer">movies</Link>
                <div className="capitalize px-2 cursor-pointer">new and popular</div>
-               <div className="capitalize px-2 cursor-pointer">my list</div>
+               <Link to="/dashboard/users" className="capitalize px-2 cursor-pointer">my list</Link>
+               <Link to="/dashboard" className="capitalize px-2 cursor-pointer">Dashboard</Link>
               </div>
              </div>
        </div>
@@ -72,6 +73,7 @@ function Navbar(){
                <Link to="/movies" onClick={()=>setDropedDowen(false)} className="block capitalize px-2 py-1 cursor-pointer">movies</Link>
                <div onClick={()=>setDropedDowen(false)} className="capitalize px-2 py-1 cursor-pointer">new and popular</div>
                <div onClick={()=>setDropedDowen(false)} className="capitalize px-2 py-1 cursor-pointer">my list</div>
+               <Link to="/dashboard" onClick={()=>setDropedDowen(false)} className="block capitalize px-2 py-1 cursor-pointer">Dashboard</Link>
                <div onClick={()=>setDropedDowen(false)} className="capitalize px-2 mb-2 mt-4 cursor-pointer">logout</div>
                
               </div>

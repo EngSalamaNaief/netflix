@@ -11,11 +11,13 @@ router.post("/register",async(req,res)=>{
        
         const newUser = User({
             email:req.body.email,
+            username:req.body.username,
+            profilePic:req.body.profilePic||"",
             isAdmin:req.body.isAdmin||false,
             password:bcrypt.hashSync(req.body.password,salt)
         });
         const savedUser=await newUser.save();
-       console.log(savedUser)
+       
         jwt.sign(
             {id:savedUser._id,isAdmin:savedUser.isAdmin},
               process.env.SECRETCODE ,
@@ -40,7 +42,7 @@ router.post("/login",async(req,res)=>{
 
        const user=await User.findOne({email:req.body.email});
         !user&& res.status(404).json({msg:"not registered yet"});
-        console.log(user)
+        
         if(bcrypt.compareSync(req.body.password,user.password)){
 
         jwt.sign(

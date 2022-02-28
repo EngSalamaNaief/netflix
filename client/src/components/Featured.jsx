@@ -13,7 +13,7 @@ function Featured({type,genre,randumMovie,setGenre}) {
   const handleSellect=(e)=>{
     setGenre(e.target.value)
   }
-  console.log("ramdum",randumMovie)
+  
   
   return (
       <div className="relative overflow-hidden w-full" style={{height:"90vh"}}>
@@ -53,7 +53,7 @@ function Featured({type,genre,randumMovie,setGenre}) {
              </div>
              <div className='flex items-center'>
               <Link to={{pathname:"/watch",vedio:randumMovie&&randumMovie[0].vedio}} className="py-1.5 rounded-md px-5 bg-gray-100 mr-3 font-medium flex items-center justify-center"> <MdPlayArrow className='mr-1'/> Play</Link>
-              <button className="py-1.5 rounded-md bg-gray-500 text-white px-5 font-medium flex items-center justify-center"><MdInfoOutline className="mr-1"/> Info</button>
+              <Link to={{pathname:"/dashboard/moviedetails/1",movie:randumMovie&&randumMovie[0]}}  className="py-1.5 rounded-md bg-gray-500 text-white px-5 font-medium flex items-center justify-center"><MdInfoOutline className="mr-1"/> Info</Link>
               
              </div>
            </div>

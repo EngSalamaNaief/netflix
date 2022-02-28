@@ -9,14 +9,14 @@ router.put("/update/:id",auth,async(req,res)=>{
     const salt = bcrypt.genSaltSync(10);
     try{
        if(req.params.id===req.user.id||req.user.isAdmin){
-        const user = await User.findById(req.user.id);
-        const updatedUser= await User.findByIdAndUpdate(req.user.id,{$set:{
+        const user = await User.findById(req.params.id);
+        const updatedUser= await User.findByIdAndUpdate(req.params.id,{$set:{
           username:req.body.username||user.username,
           email:req.body.email||user.email,
           isAdmin:req.body.isAdmin||user.isAdmin,
           profilePic:req.body.profilePic||user.profilePic,
           password:bcrypt.hashSync(req.body.password,salt)||user.password,
-        }},{new:true});
+        }});
         res.status(202).json({user:updatedUser,
           msg:"user updated successfully"
         })
@@ -66,7 +66,7 @@ router.get("/user",auth,async(req,res)=>{
 })
 //GET ALL USERS
 router.get("/getusers",auth,async(req,res)=>{
-    const query=req.query.new;
+    const query=req.query.newUsers;
     try{
       if(req.user.isAdmin){
         const user= query?await User.find().sort("createdAt",-1).limit(10):await User.find();
@@ -82,7 +82,8 @@ router.get("/getusers",auth,async(req,res)=>{
 router.get("/userstats",auth,async(req,res)=>{
    const today=new Date();
    const lastYear=today.setFullYear(today.setFullYear - 1);
-    const month=[
+   const returnedarray=[]
+    const months=[
       "January",
       "February",
       "March",
@@ -100,7 +101,7 @@ router.get("/userstats",auth,async(req,res)=>{
         const data = await User.aggregate([
           {
             $project:{
-              month:{$month:"createdAt"}
+              month:{$month:"$createdAt"}
             }
           },
           {
@@ -110,8 +111,12 @@ router.get("/userstats",auth,async(req,res)=>{
             }
           }
           ])
-          console.log(data)
-        res.status(202).json(data)
+          data.map(item=>{
+            returnedarray.push({month:months[item._id-1],total:item.total})
+          })
+          console.log("returnedarray",returnedarray)
+          console.log("returnedarray",data)
+        res.status(202).json(returnedarray)
     }catch(err){
         res.status(404).json({msg:err})
     }
