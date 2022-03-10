@@ -1,106 +1,46 @@
-export default function WidgetLg() {
+import {Link} from "react-router-dom";
+import {MdRemoveRedEye} from "react-icons/md";
+export default function WidgetLg({movie}) {
   return (
   <div className="md:p-4">
      <div className="p-4 box">
-     <div className="capitalize pb-2 text-lg font-semibold "> Latest Transaction</div>
+     <div className="capitalize pb-2 text-lg font-semibold "> Latest Movies</div>
          <table className="w-full " style={{borderSpacing:"20px"}}>
             <thead>
              <tr className="text-left ">
-                    <th className="py-2 ">Customers</th>
-                    <th className=" ">Date</th>
-                    <th className=" ">Amount</th>
-                    <th className=" ">Status</th>
+                    <th className="py-2 ">Movie</th>
+                    <th className=" ">Genre</th>
+                    <th className=" ">year</th>
+                    
              </tr>
              </thead>
              <tbody>
-             <tr className="text-left text-base font-normal">
-               <th className="font-normal py-2">
+          {movie?.map(m=> ( <tr className="text-left text-base font-normal">
+               <th className="font-normal p-2">
                   <div className="flex items-center">
                     <div className="h-10 w-10 overflow-hidden rounded-full mr-2">
-                    <img className="w-full h-full object-cover" src="./img/nature.jpg" alt="na" />
+                    <img className="w-full h-full object-cover" src={m.img} alt="na" />
                     </div>
                     <div className="">
-                        <div className="capitalize text-normal">User Name</div> 
+                        <div className="capitalize text-normal">{m.title}</div> 
                     </div>
                 </div>
                </th>
-               <th  className="font-normal text-gray-400">
-                 <div>2 jun 2021</div>
+               <th  className="font-normal p-2 text-gray-400">
+                 <div>{m.genre}</div>
                </th>
-               <th  className="font-normal   text-gray-400">
-                 <div>$122.0</div>
+               <th  className="font-normal text-gray-400 p-2">
+                 <div>{m.year}</div>
                </th>
-               <th  className="font-normal">
-                 <div className="bg-green-100 cursor-pointer w-fit px-2 rounded-lg text-green-400">Approved</div>
+               <th  className="font-normal  p-2">
+                  <Link to={{pathname:`/dashbord/movieupdate/${m._id}`,movie:movie}} className="flex items-center cursor-pointer bg-gray-200 py-1 px-2 rounded-lg">
+                    <MdRemoveRedEye/>
+                    <div className="text-gray-500 text-sm ml-1.5">Display</div>
+                 </Link>  
                </th>
-             </tr>
-
-             <tr className="text-left text-base font-normal">
-               <th className="font-normal py-2">
-                  <div className="flex items-center">
-                    <div className="h-10 w-10 overflow-hidden rounded-full mr-2">
-                    <img className="w-full h-full object-cover" src="./img/nature.jpg" alt="na" />
-                    </div>
-                    <div className="">
-                        <div className="capitalize text-normal">User Name</div> 
-                    </div>
-                </div>
-               </th>
-               <th  className="font-normal text-gray-400">
-                 <div>2 jun 2021</div>
-               </th>
-               <th  className="font-normal text-gray-400">
-                 <div>$122.0</div>
-               </th>
-               <th  className="font-normal">
-                 <div className="bg-red-100 cursor-pointer w-fit px-2 rounded-lg text-red-400">Declined</div>
-               </th>
-             </tr>
-
-             <tr className="text-left text-base font-normal">
-               <th className="font-normal py-2">
-                  <div className="flex items-center">
-                    <div className="h-10 w-10 overflow-hidden rounded-full mr-2">
-                    <img className="w-full h-full object-cover" src="./img/nature.jpg" alt="na" />
-                    </div>
-                    <div className="">
-                        <div className="capitalize text-normal">User Name</div> 
-                    </div>
-                </div>
-               </th>
-               <th  className="font-normal text-gray-400">
-                 <div>2 jun 2021</div>
-               </th>
-               <th  className="font-normal text-gray-400">
-                 <div>$122.0</div>
-               </th>
-               <th  className="font-normal">
-                 <div className="bg-gray-100 cursor-pointer w-fit px-2 rounded-lg text-gray-400">Pending</div>
-               </th>
-             </tr>
-
-             <tr className="text-left text-base font-normal py-4">
-               <th className="font-normal py-2">
-                  <div className="flex items-center">
-                    <div className="h-10 w-10 overflow-hidden rounded-full mr-2">
-                    <img className="w-full h-full object-cover" src="./img/nature.jpg" alt="na" />
-                    </div>
-                    <div className="">
-                        <div className="capitalize text-normal">User Name</div> 
-                    </div>
-                </div>
-               </th>
-               <th  className="font-normal text-gray-400">
-                 <div>2 jun 2021</div>
-               </th>
-               <th  className="font-normal text-gray-400">
-                 <div>$122.0</div>
-               </th>
-               <th  className="font-normal">
-                 <div className="bg-green-100 cursor-pointer w-fit px-2 rounded-lg text-green-400">Approved</div>
-               </th>
-             </tr>
-             </tbody>
+               </tr>
+           ))}
+            </tbody>
          </table>
      </div>
   </div>

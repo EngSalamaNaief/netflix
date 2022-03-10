@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import {GetAllUsers,DeleteUser} from '../../redux/actions/UserAction';
 import {connect} from "react-redux"
 
-function UsersList({GetAllUsers,allUsers,DeleteUser}) {
+function UsersList({GetAllUsers,allUsers,DeleteUser,msg_success,msg_fail}) {
   const [sellected,setSellected] = useState([]);
   const [reload,setReload] = useState(false);
   const [usersData,setUsersData] =useState(allUsers);
@@ -46,13 +46,7 @@ function UsersList({GetAllUsers,allUsers,DeleteUser}) {
     setReload(!reload)
     
   }
-  const sortByTransaction=()=>{
-    setUsersData(allUsers.sort(function(a,b){
-      return a.transaction-b.transaction;
-    }))
-    setReload(!reload)
-    //console.log(user)
-  }
+
 
   const deleteUser=(id)=>{
     setUsersData(usersData.filter(user=>user.id !== id));
@@ -113,6 +107,8 @@ function UsersList({GetAllUsers,allUsers,DeleteUser}) {
       <div className="p-4">
      <div className="p-4 box">
      <div className="capitalize pb-2 text-lg font-semibold "> Users List</div>
+   {msg_fail&&  <div className="capitalize pb-2 text-lg text-red-600 font-semibold "> {msg_fail}</div>}
+   {msg_success&&  <div className="capitalize pb-2 text-lg text-green-500 font-semibold "> {msg_success}</div>}
          <table className="w-full " style={{borderSpacing:"20px"}}>
            <thead>
              <tr className="text-left ">
@@ -177,7 +173,9 @@ function UsersList({GetAllUsers,allUsers,DeleteUser}) {
 }
 const mapStateToProps=(state)=>{
   return{
-    allUsers:state.userState.allUsers
+    allUsers:state.userState.allUsers,
+    msg_success:state.userState.msg_success,
+    msg_fail:state.userState.msg_fail,
   }
 }
 export default connect (mapStateToProps,{GetAllUsers,DeleteUser})(UsersList)

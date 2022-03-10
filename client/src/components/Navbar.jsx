@@ -1,8 +1,10 @@
 import React,{useState,useEffect} from "react";
 import {motion} from "framer-motion";
 import {Link} from "react-router-dom"
+import {connect} from "react-redux";
+import {Logout} from "../redux/actions/AuthAction";
 import {MdSearch,MdNotifications,MdArrowDropDown,MdViewHeadline,MdClose} from "react-icons/md"
-function Navbar(){
+function Navbar({user,Logout}){
   const [dropedDowen,setDropedDowen]=useState(false);
   const [isScrolled,setIsScrolled]=useState(false);
   const [isAnim,setIsAnim]=useState({visable:0,postion:-200});
@@ -38,7 +40,7 @@ function Navbar(){
                <Link to="/movies" className="capitalize px-2 cursor-pointer">movies</Link>
                <div className="capitalize px-2 cursor-pointer">new and popular</div>
                <Link to="/dashboard/users" className="capitalize px-2 cursor-pointer">my list</Link>
-               <Link to="/dashboard" className="capitalize px-2 cursor-pointer">Dashboard</Link>
+               {user.isAdmin&&(<Link to="/dashboard" className="capitalize px-2 cursor-pointer">Dashboard</Link>)}
               </div>
              </div>
        </div>
@@ -47,7 +49,7 @@ function Navbar(){
            <div className="mx-2 cursor-pointer">KID</div>
            <div className="mx-2 text-xl cursor-pointer"><MdNotifications/></div>
            <div className="w-6 h-6 mx_4 overflow-hidden rounded-md cursor-pointer">
-             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqPZAaK3gXPnXHy87YFc1UrZ7OdDOC3Rinvw&usqp=CAU" alt="" className="w-full h-full object-cover"/>
+             <img src={user?.profilePic} alt="" className="w-full h-full object-cover"/>
            </div>
            <div className="ml-2 relative">
              <MdArrowDropDown onClick={()=>dropAnim()}  className="text-3xl cursor-pointer"/>
@@ -64,7 +66,7 @@ function Navbar(){
              <div className="bg-black py-3 px-2 rounded-lg">
               <div className="flex mb-4 mt-2 items-center justify-between px-3">
                <div className="w-8 h-8 mx_4 overflow-hidden rounded-full cursor-pointer">
-                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqPZAaK3gXPnXHy87YFc1UrZ7OdDOC3Rinvw&usqp=CAU" alt="" className="w-full h-full object-cover"/>
+                 <img src={user?.profilePic} alt="" className="w-full h-full object-cover"/>
                </div>
                 <div className="mx-2 text-xl cursor-pointer"><MdSearch/></div>
                </div>
@@ -73,8 +75,8 @@ function Navbar(){
                <Link to="/movies" onClick={()=>setDropedDowen(false)} className="block capitalize px-2 py-1 cursor-pointer">movies</Link>
                <div onClick={()=>setDropedDowen(false)} className="capitalize px-2 py-1 cursor-pointer">new and popular</div>
                <div onClick={()=>setDropedDowen(false)} className="capitalize px-2 py-1 cursor-pointer">my list</div>
-               <Link to="/dashboard" onClick={()=>setDropedDowen(false)} className="block capitalize px-2 py-1 cursor-pointer">Dashboard</Link>
-               <div onClick={()=>setDropedDowen(false)} className="capitalize px-2 mb-2 mt-4 cursor-pointer">logout</div>
+               {user.isAdmin&&(<Link to="/dashboard" onClick={()=>setDropedDowen(false)} className="block capitalize px-2 py-1 cursor-pointer">Dashboard</Link>)}
+               <div onClick={()=>{setDropedDowen(false); Logout()}} className="capitalize px-2 mb-2 mt-4 cursor-pointer">logout</div>
                
               </div>
            </motion.div>
@@ -85,4 +87,9 @@ function Navbar(){
     </motion.div>
     )
 }
-export default Navbar;
+const mapStateToProps=(state)=>{
+  return{
+    user:state.authState.user
+  }
+}
+export default connect(mapStateToProps,{Logout})(Navbar);

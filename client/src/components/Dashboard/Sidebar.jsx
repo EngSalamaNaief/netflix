@@ -26,64 +26,43 @@ function SideBar() {
                    <MdLineStyle className='mr-0.5 text-lg'/>
                   <div className='text-sm font-medium'>Home</div>
                </Link>
-               <div onClick={()=>{setItems("analytcis");setSide(false);}} className={`flex items-center w-full cursor-pointer  mt-2 hover:bg-blue-100 rounded-xl py-0.5 px-2.5 ${(items==="analytcis")?"bg-blue-100":"bg-white"}`}>
-                   <MdTimeline className='mr-0.5 text-lg'/>
-                  <div  className='text-sm font-medium'>Analytics</div>
-               </div>
-               <div onClick={()=>{setItems("Sales");setSide(false);}} className={`flex items-center w-full cursor-pointer  mt-2 hover:bg-blue-100 rounded-xl py-0.5 px-2.5 ${(items==="Sales")?"bg-blue-100":"bg-white"}`}>
-                   <MdTrendingUp className='mr-0.5 text-lg'/>
-                  <div  className='text-sm font-medium'>Sales</div>
-               </div>
+             
             </div>
-            <div className='text-gray-500 text-sm mb-1 mt-2.5'>Qeick Menu</div>
+            <div className='text-gray-500 text-sm mb-1 mt-2.5'>Users Menu</div>
             <div className='pr-12'>
                <Link to="/dashboard/users" onClick={()=>{setItems("Users");setSide(false);}} className={`flex items-center w-full cursor-pointer  mt-2 hover:bg-blue-100 rounded-xl py-0.5 px-2.5 ${(items==="Users")?"bg-blue-100":"bg-white"}`}>
                    <MdOutlinePermIdentity className='mr-0.5 text-lg'/>
                   <div className='text-sm font-medium'>Users</div>
                </Link>
-               <Link to="/dashboard/movies" onClick={()=>{setItems("Products");setSide(false);}} className={`flex items-center w-full cursor-pointer  mt-2 hover:bg-blue-100 rounded-xl py-0.5 px-2.5 ${(items==="Products")?"bg-blue-100":"bg-white"}`}>
-                   <MdStorefront className='mr-0.5 text-lg'/>
-                  <div  className='text-sm font-medium'>Products</div>
+               <Link to="/dashboard/createuser" onClick={()=>{setItems("Create User");setSide(false);}} className={`flex items-center w-full cursor-pointer  mt-2 hover:bg-blue-100 rounded-xl py-0.5 px-2.5 ${(items==="Create User")?"bg-blue-100":"bg-white"}`}>
+                   <MdOutlinePermIdentity className='mr-0.5 text-lg'/>
+                  <div className='text-sm font-medium'>Create User</div>
                </Link>
-               <div onClick={()=>{setItems("Transaction");setSide(false);}}  className={`flex items-center w-full cursor-pointer  mt-2 hover:bg-blue-100 rounded-xl py-0.5 px-2.5 ${(items==="Transaction")?"bg-blue-100":"bg-white"}`}>
-                   <BsCurrencyDollar className='mr-0.5 text-lg'/>
-                  <div  className='text-sm font-medium'>Transaction</div>
-               </div>
-               <div onClick={()=>{setItems("reports");setSide(false);}} className={`flex items-center w-full cursor-pointer  mt-2 hover:bg-blue-100 rounded-xl py-0.5 px-2.5 ${(items==="reports")?"bg-blue-100":"bg-white"}`}>
-                   <MdOutlineBarChart className='mr-0.5 text-lg'/>
-                  <div  className='text-sm font-medium'>Reports</div>
-               </div>
             </div>
-            <div className='text-gray-500 text-sm mb-1 mt-2.5'>Notification</div>
+            <div className='text-gray-500 text-sm mb-1 mt-2.5'>List Menu</div>
             <div className='pr-12'>
-               <div onClick={()=>{setItems("Mail");setSide(false);}} className={`flex items-center w-full cursor-pointer  mt-2 hover:bg-blue-100 rounded-xl py-0.5 px-2.5 ${(items==="Mail")?"bg-blue-100":"bg-white"}`}>
-                   <MdOutlineMail className='mr-0.5 text-lg'/>
-                  <div  className='text-sm font-medium'>Mail</div>
-               </div>
-               <div onClick={()=>{setItems("Feedback");setSide(false);}} className={`flex items-center w-full cursor-pointer  mt-2 hover:bg-blue-100 rounded-xl py-0.5 px-2.5 ${(items==="Feedback")?"bg-blue-100":"bg-white"}`}>
-                   <MdOutlineDynamicFeed className='mr-0.5 text-lg'/>
-                  <div  className='text-sm font-medium'>Feedback</div>
-               </div>
-               <div onClick={()=>{setItems("Messages");setSide(false);}} className={`flex items-center w-full cursor-pointer  mt-2 hover:bg-blue-100 rounded-xl py-0.5 px-2.5 ${(items==="Messages")?"bg-blue-100":"bg-white"}`}>
-                   <MdOutlineTextsms className='mr-0.5 text-lg'/>
-                  <div  className='text-sm font-medium'>Messages</div>
-               </div>
+               <Link to="/dashboard/lists" onClick={()=>{setItems("List");setSide(false);}} className={`flex items-center w-full cursor-pointer  mt-2 hover:bg-blue-100 rounded-xl py-0.5 px-2.5 ${(items==="List")?"bg-blue-100":"bg-white"}`}>
+                   <MdOutlinePermIdentity className='mr-0.5 text-lg'/>
+                  <div className='text-sm font-medium'>Lists</div>
+               </Link>
+               <Link to="/dashboard/createlist" onClick={()=>{setItems("List User");setSide(false);}} className={`flex items-center w-full cursor-pointer  mt-2 hover:bg-blue-100 rounded-xl py-0.5 px-2.5 ${(items==="List User")?"bg-blue-100":"bg-white"}`}>
+                   <MdOutlinePermIdentity className='mr-0.5 text-lg'/>
+                  <div className='text-sm font-medium'>Create List</div>
+               </Link>
             </div>
-            <div className='text-gray-500 text-sm mb-1 mt-2.5'>Staff</div>
+            <div className='text-gray-500 text-sm mb-1 mt-2.5'>Movie Menu</div>
             <div className='pr-12'>
-               <div onClick={()=>{setItems("Manage");setSide(false);}} className={`flex items-center w-full cursor-pointer  mt-2 hover:bg-blue-100 rounded-xl py-0.5 px-2.5 ${(items==="Manage")?"bg-blue-100":"bg-white"}`}>
-                   <MdOutlineBusinessCenter className='mr-0.5 text-lg'/>
-                  <div  className='text-sm font-medium'>Manage</div>
-               </div>
-               <div onClick={()=>{setItems("Analytics");setSide(false);}} className={`flex items-center w-full cursor-pointer  mt-2 hover:bg-blue-100 rounded-xl py-0.5 px-2.5 ${(items==="Analytics")?"bg-blue-100":"bg-white"}`}>
-                   <MdTimeline className='mr-0.5 text-lg'/>
-                  <div  className='text-sm font-medium'>Analytics</div>
-               </div>
-               <div onClick={()=>{setItems("Reports");setSide(false);}} className={`flex items-center w-full cursor-pointer  mt-2 hover:bg-blue-100 rounded-xl py-0.5 px-2.5 ${(items==="Reports")?"bg-blue-100":"bg-white"}`}>
-                   <MdReport className='mr-0.5 text-lg'/>
-                  <div  className='text-sm font-medium'>Reports</div>
-               </div>
+               <Link to="/dashboard/movies" onClick={()=>{setItems("Movies");setSide(false);}} className={`flex items-center w-full cursor-pointer  mt-2 hover:bg-blue-100 rounded-xl py-0.5 px-2.5 ${(items==="Movies")?"bg-blue-100":"bg-white"}`}>
+                   <MdStorefront className='mr-0.5 text-lg'/>
+                  <div  className='text-sm font-medium'>Movies</div>
+               </Link>
+               <Link to="/dashboard/createmovie" onClick={()=>{setItems("Createmovie");setSide(false);}} className={`flex items-center w-full cursor-pointer  mt-2 hover:bg-blue-100 rounded-xl py-0.5 px-2.5 ${(items==="Createmovie")?"bg-blue-100":"bg-white"}`}>
+                   <MdStorefront className='mr-0.5 text-lg'/>
+                  <div  className='text-sm font-medium'>Create Movie</div>
+               </Link>
             </div>
+
+       
             </div>
             
         <div onClick={()=>setSide(false)} className="cursor-pointer  text-5xl text-red-600 md:hidden"><MdOutlineArrowBackIosNew/></div>

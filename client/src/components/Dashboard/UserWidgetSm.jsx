@@ -12,7 +12,7 @@ function UserWegetSm({user}) {
             <div className="text-gray-400 text-sm capitalize">{user?.email}</div>  
         </div>
     </div> 
-       <Link to={{pathname:"/",user:user}} className="flex items-center cursor-pointer bg-gray-200 py-1 px-2 rounded-lg">
+       <Link to={{pathname:`/dashboard/user/${user._id}`,user:user}} className="flex items-center cursor-pointer bg-gray-200 py-1 px-2 rounded-lg">
           <MdRemoveRedEye/>
           <div className="text-gray-500 text-sm ml-1.5">Display</div>
        </Link>  

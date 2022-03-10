@@ -1,6 +1,6 @@
 import UserWegetSm from "./UserWidgetSm";
 
-export default function WidgetSm({users}) {
+export default function WidgetSm({users,movies}) {
   return (
   <div className="md:p-4 my-4">
       <div className="box p-4 ">
@@ -9,7 +9,7 @@ export default function WidgetSm({users}) {
           <UserWegetSm key={user._id} user={user}/>
         ))
         }
-        
+
       </div>
   </div>
   );

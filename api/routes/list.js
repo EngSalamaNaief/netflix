@@ -23,7 +23,7 @@ router.put("/update/:id",auth,async(req,res)=>{
     
     try{
        if(req.user.isAdmin){
-        const list=await List.findByIdAndUpdate(req.params.id,req.body);
+        const list=await List.findByIdAndUpdate(req.params.id,{$set:req.body});
         res.status(201).json({msg:"list updated succesfully"})
        }else{
          return res.status(404).json({msg:"you not allowed to update list"});
@@ -73,7 +73,7 @@ router.get("/getlist",auth,async (req,res)=>{
          ])
    }
    res.status(200).json({list});
- }catch(e){
+ }catch(err){
    res.status(404).json({msg:err})
  }
 })

@@ -69,7 +69,7 @@ router.get("/getusers",auth,async(req,res)=>{
     const query=req.query.newUsers;
     try{
       if(req.user.isAdmin){
-        const user= query?await User.find().sort("createdAt",-1).limit(10):await User.find();
+        const user= query?await User.find().limit(10):await User.find();
         res.status(202).json({user})
       }else{
         res.status(404).json({msg:"you are not allowed to see all users"})
@@ -114,8 +114,7 @@ router.get("/userstats",auth,async(req,res)=>{
           data.map(item=>{
             returnedarray.push({month:months[item._id-1],total:item.total})
           })
-          console.log("returnedarray",returnedarray)
-          console.log("returnedarray",data)
+        
         res.status(202).json(returnedarray)
     }catch(err){
         res.status(404).json({msg:err})

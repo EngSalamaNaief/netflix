@@ -84,14 +84,14 @@ import { MdOutlinePermIdentity,MdDateRange,MdPhoneIphone,MdMailOutline,MdLocatio
     console.log(location);
   return (
     <div className='pt-10 text-gray-900'>
-      <div className='md:p-4'>
+      <div className='md:p-4 box'>
          <div className="flex items-center justify-between mb-6">
               <div className='text-2xl font-bold text-black'> Edit Movie</div>
               <Link to="/dashboard/createmovie" className='bg-green-600 px-5 py-1 text-white rounded-lg'>Create Movie</Link>
           </div>
 
           <div className=' my-4 md:my-0'>
-              <div className='w-full '>
+              <div className='w-full md:mr '>
                 <div className='box p-4'>
                     <div className="">
                         <div className="h-10 w-10 overflow-hidden rounded-full mr-6">
@@ -110,7 +110,7 @@ import { MdOutlinePermIdentity,MdDateRange,MdPhoneIphone,MdMailOutline,MdLocatio
                     
                 </div>
               </div>
-              <div className='w-full md:col-span-2 md:pl-4 my-4 md:my-0'>
+              <div className='w-full md:col-span-2 md:pr-4 my-4 md:my-0'>
                   <div className='box grid md:grid-cols-2 p-4'>
                       <div className='md:pr-4 pb-4'>
                           <div className='mb-8 mt-1 text-xl font-bold '>Edit</div>

@@ -45,22 +45,11 @@ function RootPage({userState}) {
          <Route path="/login">
            {!user?(<SigninPage/>):(<Redirect to="/"/>)}
          </Route>
-         {/*
-              <Route path="/dashboard" >
-                 <DashHome/>
-              </Route>
-              
-              <Route path="/dashboard/users">
-                  <UsersList/>
-              </Route>
-              <Route path="/dashboard/user/:id">
-                  <User/>
-              </Route>
-              <Route path="/dashboard/movies">
-                  <MovieList/>
-              </Route>
-              */}
-            <Route> <Dashboard/></Route>
+
+            <Route path="/dashboard"> 
+              {user?(<Dashboard user={user}/>):(<Redirect to="/"/>)}
+            
+            </Route>
          <Route >
            <Notfound/>
          </Route>

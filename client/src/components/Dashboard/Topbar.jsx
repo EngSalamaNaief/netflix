@@ -1,10 +1,13 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 import {MdSettings,MdOutlineNotificationsActive,MdOutlineLanguage} from "react-icons/md";
-function Topbar() {
+function Topbar({user}) {
     return (
-        <div className='flex fixed left-0 top-0 w-full z-10 bg-white items-center justify-between py-2 px-5 shadow-md '>
-            <div><Link to="/" className="text-xl text-blue-900 font-bold">SalamaDashboard</Link></div>
+        <div className='flex fixed left-0 top-0 w-full z-40 bg-white items-center justify-between py-2 px-5 shadow-md '>
+            <Link to="/" className="">
+               <div className="uppercase items-center text-red-500 text-3xl md:text-4xl pr-8 font-bold cursor-pointer">netflex</div>
+            </Link>
             <div className='flex justify-items-end'>
                 <div className='flex items-center'>
                     <div className='relative cursor-pointer mr-2.5'>
@@ -18,7 +21,7 @@ function Topbar() {
                         <MdSettings className='text-2xl'/>
                     </div>
                     <div className='w-8 h-8 rounded-full cursor-pointer overflow-hidden'>
-                        <img className='object-cover w-full h-full' src="./img/nature.jpg" alt="grr" />
+                        <img className='object-cover w-full h-full' src={user?.profilePic} alt="grr" />
                     </div>
                 </div>
             </div>
@@ -26,4 +29,9 @@ function Topbar() {
     )
 }
 
-export default Topbar
+const mapStateToPrpos=(state)=>{
+  return{
+    user:state.authState.user
+  }
+}
+export default connect(mapStateToPrpos)(Topbar)

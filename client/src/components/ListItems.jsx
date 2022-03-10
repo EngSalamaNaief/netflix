@@ -12,7 +12,7 @@ useEffect(()=>{
   GetMovie(movieId)
 },[movieId])
 useEffect(()=>{
-  setMovie(movieList.find(m=>m._id===movieId))
+  setMovie(movieList?.find(m=>m?._id===movieId))
 },[movieId,movieList])
 console.log("mmovie",movieList)
   return (

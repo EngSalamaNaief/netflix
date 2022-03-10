@@ -13,7 +13,9 @@ LOADING_ALL,
 LOADING_MOVIE,
 LOADING_RANDUM,
 CREATE_MOVIE_SUCCES,
-CREATE_MOVIE_FAIL
+CREATE_MOVIE_FAIL,
+STATS_MOVIE_SUCCES,
+STATS_MOVIE_FAIL
 } from "../constants/MovieConst";
 
 import axios from "axios";
@@ -44,7 +46,7 @@ export const GetMovie=(id)=>(dispatch,getState)=>{
     }
     }
 //git all movies
-export const GetALLMovie=()=>(dispatch,getState)=>{
+export const GetALLMovie=(query)=>(dispatch,getState)=>{
   dispatch({type:LOADING_ALL});
    const token =getState().authState.token;
   const config={
@@ -54,7 +56,7 @@ export const GetALLMovie=()=>(dispatch,getState)=>{
   }
     if(token){
       config.headers["x-auth-token"]=token;
-      axios.get(`/api/movies/allmovies`,config)
+      axios.get(`/api/movies/allmovies${query?"?new="+query:""}`,config)
            .then(res=>{
              dispatch({
                type:GET_ALL_MOVIES_SUCCESS,
@@ -70,7 +72,7 @@ export const GetALLMovie=()=>(dispatch,getState)=>{
     }
     
   // GET RANDUM MOVIES
-export const GetRandumMovie=(query)=>(dispatch,getState)=>{
+export const GetRandumMovie=()=>(dispatch,getState)=>{
   dispatch({type:LOADING_RANDUM});
    const token =getState().authState.token;
   const config={
@@ -80,7 +82,7 @@ export const GetRandumMovie=(query)=>(dispatch,getState)=>{
   }
     if(token){
       config.headers["x-auth-token"]=token;
-      axios.get(`/api/movies/getrandum${query?"?type="+query:""}`,config)
+      axios.get(`/api/movies/getrandum`,config)
            .then(res=>{
              dispatch({
                type:GET_RANDUM_MOVIES_SUCCESS,
@@ -89,6 +91,31 @@ export const GetRandumMovie=(query)=>(dispatch,getState)=>{
            }).catch(e=>{
                dispatch({
                type:GET_RANDUM_MOVIES_FAIL,
+               payload:e.response.data.msg
+             })
+           })
+    }
+    }
+  // MOVIE STATS
+export const MovieStats=()=>(dispatch,getState)=>{
+  dispatch({type:LOADING_RANDUM});
+   const token =getState().authState.token;
+  const config={
+    headers:{
+      "type-content":"application/json"
+    }
+  }
+    if(token){
+      config.headers["x-auth-token"]=token;
+      axios.get(`/api/movies/moviestats`,config)
+           .then(res=>{
+             dispatch({
+               type:STATS_MOVIE_SUCCES,
+               payload:res.data
+             })
+           }).catch(e=>{
+               dispatch({
+               type:STATS_MOVIE_FAIL,
                payload:e.response.data.msg
              })
            })

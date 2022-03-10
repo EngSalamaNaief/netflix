@@ -5,13 +5,16 @@ import MovieUpdate from "./Dashboard/MovieUpdate";
 import MovieDetails from "./Dashboard/MovieDetails";
 import CreateUser from "./Dashboard/CreateUser";
 import CreateMovie from "./Dashboard/CreateMovie";
+import Lists from "./Dashboard/Lists";
+import UpdateList from "./Dashboard/UpdateList";
+import CreateList from "./Dashboard/CreateList";
 //import { BrowserRouter as Router,Route,Switch} from 'react-router-dom';
-import {Route} from 'react-router-dom';
+import {Route,Redirect} from 'react-router-dom';
 import UsersList from "./Dashboard/UserList";
 import MovieList from "./Dashboard/MovieList";
 import User from "./Dashboard/User";
 
-function Dashboard() {
+function Dashboard({user}) {
   return (
    
     <div className="px-2">
@@ -23,29 +26,48 @@ function Dashboard() {
          <div className="pt-3 col-span-4">
            
               <Route path="/dashboard" exact >
-                 <DashHome/>
+              {user.isAdmin?(<DashHome />):(<Redirect to="/"/>)}
               </Route>
               
               <Route path="/dashboard/users">
-                  <UsersList/>
+                {user.isAdmin?(<UsersList />):(<Redirect to="/"/>)}
+                  
               </Route>
               <Route path="/dashboard/user/:id">
+                    {user.isAdmin?(<User />):(<Redirect to="/"/>)}
                   <User/>
               </Route>
               <Route path="/dashboard/movies">
-                  <MovieList/>
+                    {user.isAdmin?(<MovieList />):(<Redirect to="/"/>)}
+                  
               </Route>
               <Route path="/dashboard/movieupdate/:id">
-                  <MovieUpdate/>
+                    {user.isAdmin?(<MovieUpdate />):(<Redirect to="/"/>)}
+                  
               </Route>
               <Route path="/dashboard/moviedetails/:id">
-                  <MovieDetails/>
+                    {user.isAdmin?(<MovieDetails />):(<Redirect to="/"/>)}
+                  
               </Route>
               <Route path="/dashboard/createuser">
-                  <CreateUser/>
+                    {user.isAdmin?(<CreateUser />):(<Redirect to="/"/>)}
+                  
               </Route>
               <Route path="/dashboard/createmovie">
-                  <CreateMovie/>
+                    {user.isAdmin?(<CreateMovie />):(<Redirect to="/"/>)}
+                  
+              </Route>
+              <Route path="/dashboard/lists">
+                    {user.isAdmin?(<Lists />):(<Redirect to="/"/>)}
+                  <Lists/>
+              </Route>
+              <Route path="/dashboard/createlist">
+                    {user.isAdmin?(<CreateList />):(<Redirect to="/"/>)}
+                  
+              </Route>
+              <Route path="/dashboard/updatelist/:id">
+                    {user.isAdmin?(<UpdateList />):(<Redirect to="/"/>)}
+                  
               </Route>
            
             

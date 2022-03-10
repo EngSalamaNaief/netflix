@@ -59,8 +59,9 @@ router.get("/getmovie/:id",auth,async(req,res)=>{
 })
 //GET ALL MOVIE
 router.get("/allmovies",auth,async(req,res)=>{
+    const query=req.query.new;
     try{
-       const movies= await Movie.find();
+       const movies= query? await Movie.find().limit(10):await Movie.find();
         res.status(201).json({movies})
     }catch(err){
         res.status(404).json({msg:err})
@@ -83,6 +84,48 @@ router.get("/getrandum",auth,async(req,res)=>{
           ])
       }
       res.status(200).json({movies});
+    }catch(err){
+        res.status(404).json({msg:err})
+    }
+})
+//MOVIE STATS
+router.get("/moviestats",auth,async(req,res)=>{
+   const today=new Date();
+   const lastYear=today.setFullYear(today.setFullYear - 1);
+   const returnedarray=[]
+    const months=[
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+      ]
+    try{
+        const data = await Movie.aggregate([
+          {
+            $project:{
+              month:{$month:"$createdAt"}
+            }
+          },
+          {
+            $group:{
+              _id:"$month",
+              total:{$sum:1}
+            }
+          }
+          ])
+          data.map(item=>{
+            returnedarray.push({month:months[item._id-1],total:item.total})
+          })
+
+        res.status(202).json(returnedarray)
     }catch(err){
         res.status(404).json({msg:err})
     }
