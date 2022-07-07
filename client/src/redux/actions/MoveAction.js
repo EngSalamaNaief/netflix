@@ -31,7 +31,7 @@ export const GetMovie=(id)=>(dispatch,getState)=>{
   }
    if(token){
      config.headers["x-auth-token"]=token;
-      axios.get(`/api/movies/getmovie/${id}`,config)
+      axios.get(`http://localhost:5000/api/movies/getmovie/${id}`,config)
            .then(res=>{
              dispatch({
                type:GET_MOVIE_SUCCES,
@@ -56,7 +56,7 @@ export const GetALLMovie=(query)=>(dispatch,getState)=>{
   }
     if(token){
       config.headers["x-auth-token"]=token;
-      axios.get(`/api/movies/allmovies${query?"?new="+query:""}`,config)
+      axios.get(`http://localhost:5000/api/movies/allmovies${query?"?new="+query:""}`,config)
            .then(res=>{
              dispatch({
                type:GET_ALL_MOVIES_SUCCESS,
@@ -82,7 +82,7 @@ export const GetRandumMovie=()=>(dispatch,getState)=>{
   }
     if(token){
       config.headers["x-auth-token"]=token;
-      axios.get(`/api/movies/getrandum`,config)
+      axios.get(`http://localhost:5000/api/movies/getrandum`,config)
            .then(res=>{
              dispatch({
                type:GET_RANDUM_MOVIES_SUCCESS,
@@ -107,7 +107,7 @@ export const MovieStats=()=>(dispatch,getState)=>{
   }
     if(token){
       config.headers["x-auth-token"]=token;
-      axios.get(`/api/movies/moviestats`,config)
+      axios.get(`http://localhost:5000/api/movies/moviestats`,config)
            .then(res=>{
              dispatch({
                type:STATS_MOVIE_SUCCES,
@@ -133,7 +133,7 @@ export const CreateMovie=(movie)=>(dispatch,getState)=>{
    
     if(token){
       config.headers["x-auth-token"]=token;
-      axios.post(`/api/movies/create`,movie,config)
+      axios.post(`http://localhost:5000/api/movies/create`,movie,config)
            .then(res=>{
              dispatch({
                type:CREATE_MOVIE_SUCCES,
@@ -160,7 +160,7 @@ export const UpdateMovie=(movie,id)=>(dispatch,getState)=>{
    
     if(token){
       config.headers["x-auth-token"]=token;
-      axios.put(`/api/movies/update/${id}`,movie,config)
+      axios.put(`http://localhost:5000/api/movies/update/${id}`,movie,config)
            .then(res=>{
              dispatch({
                type:UPDATE_MOVIE_SUCCES,
@@ -186,7 +186,7 @@ export const DeleteMovie=(id)=>(dispatch,getState)=>{
   
     if(token){
       config.headers["x-auth-token"]=token;
-      axios.delete(`/api/movies/delete/${id}`,config)
+      axios.delete(`http://localhost:5000/api/movies/delete/${id}`,config)
            .then(res=>{
              dispatch({
                type:DELETE_MOVIE_SUCCESS,

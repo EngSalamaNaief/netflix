@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import {MdPlayArrow,MdInfoOutline} from "react-icons/md"
 function Featured({type,genre,randumMovie,setGenre}) {
   
-  
+  console.log("rndum",randumMovie)
   useEffect(()=>{
     
      setGenre("")
@@ -42,17 +42,17 @@ function Featured({type,genre,randumMovie,setGenre}) {
                }
            </div>
            <div className='w-full h-full'  >
-              <img src={randumMovie&&randumMovie[0].img} className='w-full h-full object-cover' alt="" />
+              <img src={randumMovie&&randumMovie[0]?.img} className='w-full h-full object-cover' alt="" />
            </div>
            <div className="absolute z-10 bottom-20 md:left-10 left-0 w-full px-2">
-             <div className="md:w-96 w-full h-24 ">
-               <img className="w-full h-full object-fit" src={randumMovie&&randumMovie[0].imgSm} alt="" />
+             <div className=" w-fit" style={{background:"linear-gradient(to left,transparent 0%,rgb(0,0,0,0.2) 50%)"}}>
+              <div className='text-8xl text-white font-semibold' style={{fontStyle:"italic"}}>{randumMovie&&randumMovie[0]?.title}</div>
              </div>
-             <div className="md:w-1/3 w-full leading-6 my-5 text-wrap text-sm text-white py-1 px-2 rounded-md" style={{background:"linear-gradient(to left,transparent 0%,rgb(0,0,0,0.2) 50%)"}}>
-              {randumMovie&&randumMovie[0].desc}
+             <div className="md:w-1/3 w-fit leading-6 my-5 text-wrap text-sm text-white py-1 px-2 rounded-md grad" style={{background:"linear-gradient(to left,transparent 0%,rgb(0,0,0,0.2) 50%)"}}>
+              {randumMovie&&randumMovie[0]?.desc}
              </div>
              <div className='flex items-center'>
-              <Link to={{pathname:"/watch",vedio:randumMovie&&randumMovie[0].vedio}} className="py-1.5 rounded-md px-5 bg-gray-100 mr-3 font-medium flex items-center justify-center"> <MdPlayArrow className='mr-1'/> Play</Link>
+              <Link to={{pathname:"/watch",vedio:randumMovie&&randumMovie[0]?.vedio}} className="py-1.5 rounded-md px-5 bg-gray-100 mr-3 font-medium flex items-center justify-center"> <MdPlayArrow className='mr-1'/> Play</Link>
               <Link to={{pathname:"/dashboard/moviedetails/1",movie:randumMovie&&randumMovie[0]}}  className="py-1.5 rounded-md bg-gray-500 text-white px-5 font-medium flex items-center justify-center"><MdInfoOutline className="mr-1"/> Info</Link>
               
              </div>

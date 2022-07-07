@@ -21,7 +21,7 @@ function RootPage({userState}) {
       
     setUser(userState.user)
   },[userState.user])
- 
+ console.log("ussser",user)
   return (
  
       <Router >
@@ -47,7 +47,8 @@ function RootPage({userState}) {
          </Route>
 
             <Route path="/dashboard"> 
-              {user?(<Dashboard user={user}/>):(<Redirect to="/"/>)}
+              {/*user?(<Dashboard user={user}/>):(<Redirect to="/"/>)*/}
+              <Dashboard user={user}/>
             
             </Route>
          <Route >

@@ -18,17 +18,13 @@ router.post("/register",async(req,res)=>{
         });
         const savedUser=await newUser.save();
        
-        jwt.sign(
+        const token=jwt.sign(
             {id:savedUser._id,isAdmin:savedUser.isAdmin},
               process.env.SECRETCODE ,
             {expiresIn:3600},
-            (err,token)=>{
-                if(err)
-                 throw err;
-
-                res.status(201).json({token,user:savedUser});
-            }
-        )
+            )
+            !token&&console.log("error token")
+            res.status(201).json({token,user:savedUser})
     }catch(err){
         res.status(404).json({msg:err})
     }
@@ -39,22 +35,20 @@ router.post("/register",async(req,res)=>{
 router.post("/login",async(req,res)=>{
     const salt = bcrypt.genSaltSync(10);
     try{
-
-       const user=await User.findOne({email:req.body.email});
+        
+        const user=await User.findOne({email:req.body.email});
         !user&& res.status(404).json({msg:"not registered yet"});
         
         if(bcrypt.compareSync(req.body.password,user.password)){
-
-        jwt.sign(
-            {id:user._id,isAdmin:user.isAdmin},
-            process.env.SECRETCODE,
-            {expiresIn:3600},
-            (err,token)=>{
-                if(err)
-                 throw err;
-                res.status(201).json({token,user:user});
-            }
-        )
+            
+            const token=jwt.sign(
+                {id:user._id,isAdmin:user.isAdmin},
+                process.env.SECRETCODE,
+                {expiresIn:3600},
+                )
+               
+            !token&&console.log("error token")
+            res.status(201).json({token,user:user});
         }else{
             res.status(404).json({msg:"wrong password"});
         }

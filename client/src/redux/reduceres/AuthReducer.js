@@ -33,7 +33,6 @@ export default function AuthReducer(state=initState,action){
       }
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:{
-      console.log("actions",action)
       localStorage.setItem("token",action.payload.token)
       return{
         ...state,

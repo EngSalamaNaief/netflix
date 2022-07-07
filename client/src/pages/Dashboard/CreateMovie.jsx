@@ -6,6 +6,8 @@ import Storage from "../../Firebase";
  import {connect} from "react-redux";
  import {CreateMovie} from "../../redux/actions/MoveAction"
 import { MdOutlinePermIdentity,MdDateRange,MdPhoneIphone,MdMailOutline,MdLocationSearching,MdUpload } from 'react-icons/md';
+
+
  function CreateMovies({CreateMovie}) {
     const [movie,setMovie] =useState({});
     const [uploadedFiles,setUploadedFiles] =useState([]);
@@ -17,7 +19,7 @@ import { MdOutlinePermIdentity,MdDateRange,MdPhoneIphone,MdMailOutline,MdLocatio
     const [year,setYear] =useState("");
     const [isSeries,setIsSeries] =useState(false);
     const [img,setImg] =useState(null);
-    const [imgTitle,setImgTitle] =useState(null);
+    const [progress,setProgress] =useState(0);
     const [imgSm,setImgSm] =useState(null);
     const [trailer,setTrailer] =useState(null);
     const [vedio,setVedio] =useState(null);
@@ -31,8 +33,8 @@ import { MdOutlinePermIdentity,MdDateRange,MdPhoneIphone,MdMailOutline,MdLocatio
 
     const UploadFiles=()=>{
            
-        if(img,imgSm,imgTitle,trailer,vedio ){
-            const files=[{file:img,label:"img"},{file:imgSm,label:"imgSm"},{file:imgTitle,label:"imgTitle"},{file:trailer,label:"trailer"},{file:vedio,label:"vedio"}]
+        if(img,imgSm,trailer,vedio ){
+            const files=[{file:img,label:"img"},{file:imgSm,label:"imgSm"},{file:trailer,label:"trailer"},{file:vedio,label:"vedio"}]
             files.forEach(item=>{
                 const fileName = new Date().getTime() +item.label
                 //const uploadTask = Storage.ref(`/userImgs/${fileName}`).put(image);
@@ -41,7 +43,8 @@ import { MdOutlinePermIdentity,MdDateRange,MdPhoneIphone,MdMailOutline,MdLocatio
                 const uploadTask = uploadBytesResumable(storageRef, item.file);
                 uploadTask.on('state_changed', 
                 (snapshot) => {
-                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    const progress1 = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    setProgress(progress1)
                     console.log('Upload is ' + progress + '% done');
                 
                 }, 
@@ -73,13 +76,24 @@ import { MdOutlinePermIdentity,MdDateRange,MdPhoneIphone,MdMailOutline,MdLocatio
             isSeries,
             img:uploadedFiles.img,
             imgSm:uploadedFiles.imgSm,
-            imgTitle:uploadedFiles.imgTitle,
             trailer:uploadedFiles.trailer,
             vedio:uploadedFiles.vedio,
+           
         }
-          console.log(newMovie);
-
+         
         CreateMovie(newMovie)
+        setDesc(null)
+        setGenre(null)
+        setImg(null)
+        setImgSm(null)
+        setTitle(null)
+        setLimit(null)
+        setYear(null)
+        setGenre(false)
+        setTrailer(null)
+        setVedio(null)
+        setNum(0)
+
     }
     console.log(uploadedFiles);
   return (
@@ -91,7 +105,7 @@ import { MdOutlinePermIdentity,MdDateRange,MdPhoneIphone,MdMailOutline,MdLocatio
 
               <div className='w-full  my-4'>
                   <div className='box grid md:grid-cols-2 p-4'>
-                      <div className='pb-4'>
+                      <div className='pb-4 md:mx-10'>
                           
                           <form action="post">
                               <div className='text-gray-900'>
@@ -142,7 +156,7 @@ import { MdOutlinePermIdentity,MdDateRange,MdPhoneIphone,MdMailOutline,MdLocatio
                              
                           </form>
                       </div>
-                      <div className="pb-4 md:flex md:justify-end">
+                      <div className="pb-4 md:flex md:justify-end md:mx-16">
                          <div className='flex flex-col '>
                             <div className='flex items-center h-fit mt-10 md:mt-0 '>
                             <div className="w-10 h-10 rounded-lg overflow-hidden mr-3">
@@ -165,16 +179,7 @@ import { MdOutlinePermIdentity,MdDateRange,MdPhoneIphone,MdMailOutline,MdLocatio
                              <input onChange={e=>setImg(e.target.files[0])} type="file" id='cover' className='hidden'/>
                             </div>
                      
-                       <div className='flex items-center h-fit pt-10'>
-                            <div className="w-10 h-10 rounded-lg overflow-hidden mr-3">
-                                <img className="w-full h-full object-cover" src={movie?.img} alt="" />
-                            </div>
-                            <div>Titleimage</div>
-                             <label htmlFor="title">
-                                <MdUpload className='text-2xl ml-4 cursor-pointer'/>
-                             </label>
-                             <input onChange={e=>setImgTitle(e.target.files[0])} type="file" id='title' className='hidden'/>
-                            </div>
+
                        <div className="w-full mb-20">
                        <div className='flex items-center h-fit pt-10'>
                            
@@ -192,7 +197,11 @@ import { MdOutlinePermIdentity,MdDateRange,MdPhoneIphone,MdMailOutline,MdLocatio
                              </label>
                              <input onChange={e=>setTrailer(e.target.files[0])} type="file" id='trailer' className='hidden'/>
                          </div>
+                         <div className='relative h-3 w-full overflow-hidden mt-6 rounded-full'>
+                               <div className="absolute top-0 left-0 bg-green-500 h-full" style={{width:`${progress}%`}}></div>
                          </div>
+                         </div>
+                         
                             {
                                 (num>=5)?(
                                     <div className='h-full relative'>

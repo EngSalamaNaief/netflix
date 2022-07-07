@@ -23,7 +23,7 @@ export const UpdateUser=(user,id)=>(dispatch,getState)=>{
   }
    if(token){
      config.headers["x-auth-token"]=token;
-      axios.put(`/api/users/update/${id}`,user,config)
+      axios.put(`http://localhost:5000/api/users/update/${id}`,user,config)
            .then(res=>{
              dispatch({
                type:UPDATE_SUCCESS,
@@ -49,7 +49,7 @@ export const DeleteUser=(id)=>(dispatch,getState)=>{
   }
    if(token){
      config.headers["x-auth-token"]=token;
-      axios.delete(`/api/users/delete/${id}`,config)
+      axios.delete(`http://localhost:5000/api/users/delete/${id}`,config)
            .then(res=>{
              dispatch({
                type:DELETE_SUCCESS,
@@ -75,7 +75,7 @@ export const GetUser=(id)=>(dispatch,getState)=>{
   }
    if(token){
      config.headers["x-auth-token"]=token;
-      axios.get(`/api/users/getuser/${id}`,config)
+      axios.get(`http://localhost:5000/api/users/getuser/${id}`,config)
            .then(res=>{
              dispatch({
                type:GET_USER_SUCCESS,
@@ -100,7 +100,7 @@ export const GetAllUsers=(query)=>(dispatch,getState)=>{
   }
    if(token){
      config.headers["x-auth-token"]=token;
-      axios.get(`/api/users/getusers${query?"?new="+query:""}`,config)
+      axios.get(`http://localhost:5000/api/users/getusers${query?"?new="+query:""}`,config)
            .then(res=>{
              dispatch({
                type:ALL_USER_SUCCESS,
@@ -125,7 +125,7 @@ export const GetStatsUsers=()=>(dispatch,getState)=>{
   }
    if(token){
      config.headers["x-auth-token"]=token;
-      axios.get(`/api/users/userstats`,config)
+      axios.get(`http://localhost:5000/api/users/userstats`,config)
            .then(res=>{
              dispatch({
                type:STATS_USER_SUCCESS,

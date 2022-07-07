@@ -13,3 +13,7 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.grad{
+    color: linear-gradient(to top left, #cc0000 3%, #ff6600 74%);
+}

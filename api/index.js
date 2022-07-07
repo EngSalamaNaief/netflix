@@ -10,10 +10,10 @@ const list=require("./routes/list");
 
 
 dotenv.config();
-mongoose.connect(process.env.MONGODB_URL).then(()=>console.log("database connected succeffuly")).catch(()=>console.log("database error"));
-
 app.use(express.json());
 app.use(cors());
+mongoose.connect(process.env.MONGODB_URL).then(()=>console.log("database connected succeffuly")).catch((e)=>console.log("database error",e));
+
 app.use("/api/auth",auth);
 app.use("/api/users",user);
 app.use("/api/movies",movie);

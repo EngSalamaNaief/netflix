@@ -23,7 +23,7 @@ export const GetLists=(type,genre)=>(dispatch,getState)=>{
   
     if(token){
       config.headers["x-auth-token"]=token;
-        axios.get(`/api/lists/getlist${type?"?type="+type:""}${genre?"&genre="+genre:""}`,config)
+        axios.get(`http://localhost:5000/api/lists/getlist${type?"?type="+type:""}${genre?"&genre="+genre:""}`,config)
        .then(res=>{
          dispatch({
            type:GET_LISTS_SUCCES,
@@ -49,7 +49,7 @@ export const CreateList=(list)=>(dispatch,getState)=>{
   
     if(token){
       config.headers["x-auth-token"]=token;
-        axios.post(`/api/lists/create`,list,config)
+        axios.post(`http://localhost:5000/api/lists/create`,list,config)
        .then(res=>{
          dispatch({
            type:CREATE_LIST_SUCCES,
@@ -76,7 +76,7 @@ export const UpadeList=(list,id)=>(dispatch,getState)=>{
   
     if(token){
       config.headers["x-auth-token"]=token;
-        axios.put(`/api/lists/update/${id}`,list,config)
+        axios.put(`http://localhost:5000/api/lists/update/${id}`,list,config)
        .then(res=>{
          dispatch({
            type:UPDATE_LISTS_SUCCES,
@@ -102,7 +102,7 @@ export const DeleteList=(id)=>(dispatch,getState)=>{
   
     if(token){
       config.headers["x-auth-token"]=token;
-        axios.delete(`/api/lists/delete/${id}`,config)
+        axios.delete(`http://localhost:5000/api/lists/delete/${id}`,config)
        .then(res=>{
          dispatch({
            type:DELETE_LISTS_SUCCES,

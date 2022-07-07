@@ -10,7 +10,7 @@ LOGOUT_SUCCESS
 } from "../constants/AuthConst";
 import axios from "axios"; 
 export const LoadUser=()=>(dispatch,getState)=>{
-  
+  console.log("loooding user")
   dispatch({type:LOADING});
   
   const token =getState().authState.token;
@@ -21,9 +21,9 @@ export const LoadUser=()=>(dispatch,getState)=>{
   }
     if(token){
       config.headers["x-auth-token"]=token;
-      axios.get("/api/users/user")
+      axios.get("http://localhost:5000/api/users/user")
            .then(res=>{
-             console.log("user",res.data)
+             console.log("user looded",res.data)
              dispatch({
                type:LOAD_USER_SUCCESS,
                payload:res.data.user
@@ -49,7 +49,7 @@ export const Register=(user)=>(dispatch)=>{
     
   const body=JSON.stringify({...user})
  console.log(user)
-      axios.post("/api/auth/register",user)
+      axios.post("http://localhost:5000/api/auth/register",user)
            .then(res=>{
              console.log("res",res.data)
              dispatch({
@@ -77,7 +77,7 @@ export const Register=(user)=>(dispatch)=>{
         
    //   const body=JSON.stringify({...user})
     console.log(user)
-          axios.post("/api/auth/login",user)
+          axios.post("http://localhost:5000/api/auth/login",user)
                .then(res=>{
                  console.log("res data",res.data)
                  dispatch({

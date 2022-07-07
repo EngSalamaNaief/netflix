@@ -15,6 +15,7 @@ import MovieList from "./Dashboard/MovieList";
 import User from "./Dashboard/User";
 
 function Dashboard({user}) {
+      console.log("dashoard user",user)
   return (
    
     <div className="px-2">
@@ -26,48 +27,49 @@ function Dashboard({user}) {
          <div className="pt-3 col-span-4">
            
               <Route path="/dashboard" exact >
-              {user.isAdmin?(<DashHome />):(<Redirect to="/"/>)}
+              {/*user?.isAdmin?(<DashHome />):(<Redirect to="/"/>)*/}
+              <DashHome />
               </Route>
               
               <Route path="/dashboard/users">
-                {user.isAdmin?(<UsersList />):(<Redirect to="/"/>)}
-                  
+                {/*user?.isAdmin?(<UsersList />):(<Redirect to="/"/>)*/}
+                <UsersList />
               </Route>
               <Route path="/dashboard/user/:id">
-                    {user.isAdmin?(<User />):(<Redirect to="/"/>)}
+                    {/*user?.isAdmin?(<User />):(<Redirect to="/"/>)*/}
                   <User/>
               </Route>
               <Route path="/dashboard/movies">
-                    {user.isAdmin?(<MovieList />):(<Redirect to="/"/>)}
-                  
+                    {/*user?.isAdmin?(<MovieList />):(<Redirect to="/"/>)*/}
+                    <MovieList />
               </Route>
               <Route path="/dashboard/movieupdate/:id">
-                    {user.isAdmin?(<MovieUpdate />):(<Redirect to="/"/>)}
-                  
+                    {/*user.isAdmin?(<MovieUpdate />):(<Redirect to="/"/>)*/}
+                    <MovieUpdate />
               </Route>
               <Route path="/dashboard/moviedetails/:id">
-                    {user.isAdmin?(<MovieDetails />):(<Redirect to="/"/>)}
-                  
+                    {/*user.isAdmin?(<MovieDetails />):(<Redirect to="/"/>)*/}
+                    <MovieDetails />
               </Route>
               <Route path="/dashboard/createuser">
-                    {user.isAdmin?(<CreateUser />):(<Redirect to="/"/>)}
-                  
+                    {/*user.isAdmin?(<CreateUser />):(<Redirect to="/"/>)*/}
+                    <CreateUser />
               </Route>
               <Route path="/dashboard/createmovie">
-                    {user.isAdmin?(<CreateMovie />):(<Redirect to="/"/>)}
-                  
+                    {/*user.isAdmin?(<CreateMovie />):(<Redirect to="/"/>)*/}
+                    <CreateMovie />
               </Route>
               <Route path="/dashboard/lists">
-                    {user.isAdmin?(<Lists />):(<Redirect to="/"/>)}
+                    {/*user.isAdmin?(<Lists />):(<Redirect to="/"/>)*/}
                   <Lists/>
               </Route>
               <Route path="/dashboard/createlist">
-                    {user.isAdmin?(<CreateList />):(<Redirect to="/"/>)}
-                  
+                    {/*user.isAdmin?(<CreateList />):(<Redirect to="/"/>)*/}
+                    <CreateList />
               </Route>
               <Route path="/dashboard/updatelist/:id">
-                    {user.isAdmin?(<UpdateList />):(<Redirect to="/"/>)}
-                  
+                    {/*user.isAdmin?(<UpdateList />):(<Redirect to="/"/>)*/}
+                    <UpdateList />
               </Route>
            
             
